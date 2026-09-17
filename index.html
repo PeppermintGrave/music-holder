@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#050b0a">
-    <meta name="description" content="PeppermintGrave personal ambient music archive.">
-    <title>Music Vault: Midnight Collection</title>
+    <meta name="description" content="Music Holder - a personal digital archive for sound.">
     <link rel="icon" type="image/png" href="images/peppermint_icon.png">
+    <title>Music Holder // Audio Archive</title>
 
     <style>
         :root {
@@ -26,132 +26,76 @@
             --accent-soft: #35b997;
 
             --danger: #ff7e91;
+
+            --glow: rgba(114, 251, 209, 0.18);
             --shadow: rgba(0, 0, 0, 0.45);
 
-            --scanline-opacity: 0.035;
-            --flicker-opacity: 0;
+            --crt-overlay: rgba(114, 251, 209, 0.035);
         }
 
-        /* =========================
-           THEMES
-        ========================== */
+        /* THEMES */
 
         body.theme-amber {
-            --bg: #0c0903;
+            --bg: #0c0803;
             --bg-soft: #151006;
-            --panel: rgba(28, 20, 7, 0.82);
+            --panel: rgba(28, 19, 7, 0.82);
             --panel-solid: #171006;
 
-            --line: rgba(255, 184, 77, 0.18);
-            --line-bright: rgba(255, 184, 77, 0.42);
+            --line: rgba(255, 181, 71, 0.17);
+            --line-bright: rgba(255, 181, 71, 0.42);
 
-            --text: #fff0cf;
-            --muted: #a88e63;
-            --dim: #685638;
+            --text: #fff0d2;
+            --muted: #aa8c62;
+            --dim: #654f32;
 
-            --accent: #ffb84d;
-            --accent-soft: #c7862f;
+            --accent: #ffb547;
+            --accent-soft: #d88920;
 
-            --shadow: rgba(0, 0, 0, 0.55);
+            --glow: rgba(255, 181, 71, 0.2);
+            --crt-overlay: rgba(255, 181, 71, 0.035);
         }
 
         body.theme-matrix {
-            --bg: #020a04;
-            --bg-soft: #041208;
-            --panel: rgba(5, 24, 10, 0.82);
-            --panel-solid: #06150a;
+            --bg: #020803;
+            --bg-soft: #041006;
+            --panel: rgba(4, 24, 9, 0.82);
+            --panel-solid: #061408;
 
-            --line: rgba(72, 255, 115, 0.17);
-            --line-bright: rgba(72, 255, 115, 0.43);
+            --line: rgba(70, 255, 103, 0.16);
+            --line-bright: rgba(70, 255, 103, 0.4);
 
-            --text: #d9ffe2;
-            --muted: #67a876;
-            --dim: #35633f;
+            --text: #d8ffdf;
+            --muted: #62a66d;
+            --dim: #315a38;
 
-            --accent: #48ff73;
-            --accent-soft: #20b848;
+            --accent: #46ff67;
+            --accent-soft: #20c943;
 
-            --shadow: rgba(0, 0, 0, 0.55);
+            --glow: rgba(70, 255, 103, 0.2);
+            --crt-overlay: rgba(70, 255, 103, 0.035);
         }
 
         body.theme-cyan {
-            --bg: #02080d;
-            --bg-soft: #06131b;
-            --panel: rgba(5, 22, 31, 0.82);
-            --panel-solid: #071721;
+            --bg: #03070d;
+            --bg-soft: #06101a;
+            --panel: rgba(7, 19, 31, 0.82);
+            --panel-solid: #071420;
 
-            --line: rgba(48, 221, 255, 0.17);
-            --line-bright: rgba(48, 221, 255, 0.43);
+            --line: rgba(54, 211, 255, 0.17);
+            --line-bright: rgba(54, 211, 255, 0.42);
 
-            --text: #d9faff;
-            --muted: #669ba8;
-            --dim: #365d66;
+            --text: #d8f8ff;
+            --muted: #6c9dab;
+            --dim: #365562;
 
-            --accent: #30ddff;
-            --accent-soft: #1aa5c1;
+            --accent: #36d3ff;
+            --accent-soft: #159abb;
 
-            --shadow: rgba(0, 0, 0, 0.55);
+            --glow: rgba(54, 211, 255, 0.2);
+            --crt-overlay: rgba(54, 211, 255, 0.035);
         }
 
-        /* =========================
-           CRT MODES
-        ========================== */
-
-        body.crt-scanlines::after {
-            opacity: 0.075;
-        }
-
-        body.crt-flicker::before {
-            animation: crtFlicker 0.09s steps(2, end) infinite;
-        }
-
-        body.crt-curvature {
-            background:
-                radial-gradient(
-                    ellipse at center,
-                    transparent 55%,
-                    rgba(0, 0, 0, 0.35) 100%
-                ),
-                var(--bg);
-        }
-
-        body.crt-curvature .page {
-            filter:
-                contrast(1.03)
-                saturate(0.96);
-        }
-
-        body.crt-curvature::after {
-            box-shadow:
-                inset 0 0 90px rgba(0, 0, 0, 0.55),
-                inset 0 0 180px rgba(0, 0, 0, 0.3);
-        }
-
-        @keyframes crtFlicker {
-            0% {
-                opacity: 0.028;
-            }
-
-            20% {
-                opacity: 0.04;
-            }
-
-            40% {
-                opacity: 0.018;
-            }
-
-            60% {
-                opacity: 0.038;
-            }
-
-            80% {
-                opacity: 0.025;
-            }
-
-            100% {
-                opacity: 0.035;
-            }
-        }
+        /* BASE */
 
         * {
             box-sizing: border-box;
@@ -172,11 +116,7 @@
             background:
                 radial-gradient(
                     circle at 50% -10%,
-                    color-mix(
-                        in srgb,
-                        var(--accent) 15%,
-                        transparent
-                    ),
+                    var(--glow),
                     transparent 35%
                 ),
                 var(--bg);
@@ -191,51 +131,74 @@
             overflow-x: hidden;
 
             transition:
-                background 0.45s ease,
-                color 0.45s ease;
+                background 0.35s ease,
+                color 0.35s ease;
         }
 
-        /* Noise */
+        /* CRT EFFECT LAYERS */
 
-        body::before {
-            content: "";
+        .crt-overlay {
             position: fixed;
             inset: 0;
             pointer-events: none;
-            z-index: 999;
+            z-index: 9999;
 
-            opacity: 0.035;
-
-            background-image:
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+            opacity: 0;
+            transition: opacity 0.25s ease;
         }
 
-        /* Scanlines */
-
-        body::after {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 998;
-
-            opacity: var(--scanline-opacity);
+        .crt-overlay.scanlines {
+            opacity: 1;
 
             background:
                 repeating-linear-gradient(
                     to bottom,
                     transparent 0,
                     transparent 3px,
-                    color-mix(
-                        in srgb,
-                        var(--accent) 35%,
-                        transparent
-                    ) 4px
+                    var(--crt-overlay) 4px
                 );
+        }
 
-            transition: opacity 0.3s ease;
+        .crt-overlay.flicker {
+            animation: screenFlicker 0.12s infinite;
+        }
 
-            box-shadow: none;
+        body.crt-curvature::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9998;
+
+            border-radius: 5%;
+
+            box-shadow:
+                inset 0 0 100px rgba(0, 0, 0, 0.75),
+                inset 0 0 30px var(--glow);
+
+            opacity: 0.7;
+        }
+
+        body.crt-curvature .page {
+            transform: perspective(1800px) scale(0.992);
+            transform-origin: center;
+        }
+
+        body.crt-curvature {
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9997;
+
+            opacity: 0.035;
+
+            background-image:
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
         }
 
         button,
@@ -244,7 +207,8 @@
             font: inherit;
         }
 
-        button {
+        button,
+        select {
             cursor: pointer;
         }
 
@@ -260,11 +224,12 @@
             max-width: 1180px;
             min-width: 0;
             margin: 0 auto;
+
+            transition:
+                transform 0.3s ease;
         }
 
-        /* =========================
-           HEADER
-        ========================== */
+        /* HEADER */
 
         header {
             width: 100%;
@@ -291,8 +256,8 @@
 
             font-size: 0.82rem;
             font-weight: bold;
-            letter-spacing: 0.22em;
 
+            letter-spacing: 0.22em;
             white-space: nowrap;
         }
 
@@ -307,22 +272,23 @@
             transform: rotate(45deg);
 
             box-shadow:
-                0 0 14px
-                color-mix(
-                    in srgb,
-                    var(--accent) 50%,
-                    transparent
-                );
+                0 0 14px var(--glow);
         }
 
         .header-right {
             min-width: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
         }
 
         .header-status {
             color: var(--muted);
+
             font-size: 0.68rem;
             letter-spacing: 0.13em;
+
             text-align: right;
             white-space: nowrap;
         }
@@ -331,9 +297,59 @@
             color: var(--accent);
         }
 
-        /* =========================
-           HERO
-        ========================== */
+        .header-theme-control {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+
+            z-index: 20;
+
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 5px 7px;
+
+            border: 1px solid var(--line);
+
+            background:
+                rgba(5, 11, 10, 0.82);
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.22);
+
+            backdrop-filter: blur(10px);
+        }
+
+        .header-theme-control label {
+            color: var(--dim);
+
+            font-size: 0.48rem;
+            letter-spacing: 0.08em;
+
+            white-space: nowrap;
+        }
+
+        #themeSelect {
+            min-width: 125px;
+
+            border: 1px solid var(--line);
+
+            padding: 5px 7px;
+
+            color: var(--muted);
+            background: var(--bg-soft);
+
+            font-size: 0.48rem;
+            letter-spacing: 0.05em;
+        }
+
+        #themeSelect option {
+            background: #08100e;
+            color: #d7eee5;
+        }
+
+        /* HERO */
 
         .hero {
             min-height: 600px;
@@ -376,11 +392,9 @@
                 sans-serif;
 
             font-size: clamp(4.5rem, 13vw, 10rem);
-
             font-weight: 900;
 
             line-height: 0.83;
-
             letter-spacing: -0.045em;
 
             text-transform: uppercase;
@@ -390,18 +404,8 @@
             color: var(--accent);
 
             text-shadow:
-                0 0 18px
-                color-mix(
-                    in srgb,
-                    var(--accent) 18%,
-                    transparent
-                ),
-                0 0 50px
-                color-mix(
-                    in srgb,
-                    var(--accent) 8%,
-                    transparent
-                );
+                0 0 18px var(--glow),
+                0 0 50px var(--glow);
         }
 
         .hero-description {
@@ -415,7 +419,6 @@
             color: var(--muted);
 
             font-size: 0.78rem;
-
             line-height: 1.9;
 
             letter-spacing: 0.04em;
@@ -427,7 +430,6 @@
 
             display: flex;
             justify-content: center;
-
             flex-wrap: wrap;
 
             gap: 9px;
@@ -444,14 +446,10 @@
             padding: 8px 12px;
 
             color: var(--dim);
-
             background: rgba(5, 11, 10, 0.4);
 
             font-size: 0.62rem;
-
             letter-spacing: 0.12em;
-
-            cursor: pointer;
 
             user-select: none;
 
@@ -463,134 +461,40 @@
                 transform 0.25s ease;
         }
 
-        .meta-pill::before {
-            content: "";
-
-            position: absolute;
-            inset: 0;
-
-            background:
-                linear-gradient(
-                    110deg,
-                    transparent 20%,
-                    color-mix(
-                        in srgb,
-                        var(--accent) 20%,
-                        transparent
-                    ) 50%,
-                    transparent 80%
-                );
-
-            transform: translateX(-120%);
-
-            transition: transform 0.55s ease;
-
-            pointer-events: none;
-        }
-
         .meta-pill:hover {
             color: var(--accent);
-
             border-color: var(--line-bright);
 
-            background:
-                color-mix(
-                    in srgb,
-                    var(--accent) 6%,
-                    transparent
-                );
+            background: var(--glow);
 
             box-shadow:
-                0 0 18px
-                color-mix(
-                    in srgb,
-                    var(--accent) 8%,
-                    transparent
-                );
+                0 0 18px var(--glow),
+                inset 0 0 15px var(--glow);
 
             transform: translateY(-2px);
-        }
-
-        .meta-pill:hover::before {
-            transform: translateX(120%);
-        }
-
-        .meta-pill.active {
-            color: var(--accent);
-
-            border-color: var(--accent);
-
-            background:
-                color-mix(
-                    in srgb,
-                    var(--accent) 10%,
-                    transparent
-                );
-
-            animation: metaPulse 1.8s ease-in-out infinite;
-        }
-
-        .meta-pill.active::after {
-            content: "";
-
-            position: absolute;
-
-            left: 0;
-            right: 0;
-            bottom: 0;
-
-            height: 2px;
-
-            background: var(--accent);
-
-            box-shadow:
-                0 0 12px var(--accent);
-
-            animation: metaScan 1.4s ease-in-out infinite;
         }
 
         .hero-orb {
             position: absolute;
 
             width: min(80vw, 620px);
-
             aspect-ratio: 1 / 1;
 
             left: 50%;
             top: 50%;
 
-            transform:
-                translate(-50%, -42%);
+            transform: translate(-50%, -42%);
 
-            border:
-                1px solid
-                color-mix(
-                    in srgb,
-                    var(--accent) 7%,
-                    transparent
-                );
+            border: 1px solid var(--line);
 
             border-radius: 50%;
 
             box-shadow:
-                0 0 0 70px
-                color-mix(
-                    in srgb,
-                    var(--accent) 1.2%,
-                    transparent
-                ),
-                0 0 0 140px
-                color-mix(
-                    in srgb,
-                    var(--accent) 0.9%,
-                    transparent
-                ),
-                inset 0 0 100px
-                color-mix(
-                    in srgb,
-                    var(--accent) 2.5%,
-                    transparent
-                );
+                0 0 0 70px var(--glow),
+                0 0 0 140px var(--glow),
+                inset 0 0 100px var(--glow);
+
+            opacity: 0.45;
 
             pointer-events: none;
         }
@@ -600,15 +504,10 @@
             content: "";
 
             position: absolute;
+
             inset: 12%;
 
-            border:
-                1px dashed
-                color-mix(
-                    in srgb,
-                    var(--accent) 8%,
-                    transparent
-                );
+            border: 1px dashed var(--line);
 
             border-radius: 50%;
         }
@@ -621,9 +520,7 @@
             opacity: 0.55;
         }
 
-        /* =========================
-           SECTIONS
-        ========================== */
+        /* SECTIONS */
 
         .section {
             width: 100%;
@@ -647,7 +544,6 @@
             color: var(--accent);
 
             font-size: 0.7rem;
-
             letter-spacing: 0.12em;
         }
 
@@ -655,7 +551,6 @@
             color: var(--text);
 
             font-size: 0.7rem;
-
             letter-spacing: 0.2em;
 
             white-space: nowrap;
@@ -665,15 +560,12 @@
             height: 1px;
 
             flex: 1;
-
             min-width: 0;
 
             background: var(--line);
         }
 
-        /* =========================
-           PLAYER
-        ========================== */
+        /* PLAYER */
 
         .player-layout {
             width: 100%;
@@ -687,7 +579,6 @@
                 minmax(0, 1.1fr);
 
             align-items: center;
-
             justify-content: center;
 
             gap: clamp(28px, 5vw, 75px);
@@ -719,20 +610,12 @@
 
             background:
                 linear-gradient(
-                    color-mix(
-                        in srgb,
-                        var(--accent) 5%,
-                        transparent
-                    ) 1px,
+                    var(--line) 1px,
                     transparent 1px
                 ),
                 linear-gradient(
                     90deg,
-                    color-mix(
-                        in srgb,
-                        var(--accent) 5%,
-                        transparent
-                    ) 1px,
+                    var(--line) 1px,
                     transparent 1px
                 );
 
@@ -745,24 +628,24 @@
                     transparent 72%
                 );
 
-            opacity: 0.8;
+            opacity: 0.55;
         }
 
         .artwork-ring {
             position: absolute;
 
             width: 88%;
-
             aspect-ratio: 1 / 1;
 
-            border:
-                1px solid
-                var(--line-bright);
+            border: 1px solid var(--line-bright);
 
             border-radius: 50%;
 
             animation:
-                slowSpin 28s linear infinite;
+                slowSpin
+                28s
+                linear
+                infinite;
         }
 
         .artwork-ring::before,
@@ -773,9 +656,7 @@
 
             border-radius: 50%;
 
-            border:
-                1px dashed
-                var(--line);
+            border: 1px dashed var(--line);
         }
 
         .artwork-ring::before {
@@ -785,12 +666,7 @@
         .artwork-ring::after {
             inset: 18%;
 
-            border-color:
-                color-mix(
-                    in srgb,
-                    var(--accent) 8%,
-                    transparent
-                );
+            border-color: var(--line);
         }
 
         .disc {
@@ -811,69 +687,18 @@
                     #07100e 5px
                 );
 
-            border:
-                1px solid
-                color-mix(
-                    in srgb,
-                    var(--accent) 25%,
-                    transparent
-                );
+            border: 1px solid var(--line-bright);
 
             box-shadow:
-                0 0 0 10px
-                color-mix(
-                    in srgb,
-                    var(--accent) 2.5%,
-                    transparent
-                ),
+                0 0 0 10px var(--glow),
                 0 0 70px rgba(0, 0, 0, 0.7),
                 inset 0 0 45px rgba(0, 0, 0, 0.9);
 
             animation:
-                slowSpin 18s linear infinite;
-        }
-
-        .disc::before {
-            content: "";
-
-            position: absolute;
-
-            inset: 18%;
-
-            border:
-                1px solid
-                color-mix(
-                    in srgb,
-                    var(--accent) 10%,
-                    transparent
-                );
-
-            border-radius: 50%;
-        }
-
-        .disc::after {
-            content: "";
-
-            position: absolute;
-
-            top: 8%;
-            left: 16%;
-
-            width: 35%;
-            height: 12%;
-
-            border-radius: 50%;
-
-            background:
-                color-mix(
-                    in srgb,
-                    var(--accent) 16%,
-                    transparent
-                );
-
-            filter: blur(12px);
-
-            transform: rotate(-35deg);
+                slowSpin
+                18s
+                linear
+                infinite;
         }
 
         .disc-center {
@@ -890,33 +715,18 @@
             align-items: center;
             justify-content: center;
 
-            transform:
-                translate(-50%, -50%);
+            transform: translate(-50%, -50%);
 
-            border:
-                1px solid
-                var(--accent);
+            border: 1px solid var(--accent);
 
             border-radius: 50%;
 
             color: var(--accent);
 
-            font-size:
-                clamp(
-                    0.7rem,
-                    2vw,
-                    1rem
-                );
-
-            letter-spacing: 0.05em;
+            font-size: clamp(0.7rem, 2vw, 1rem);
 
             box-shadow:
-                0 0 18px
-                color-mix(
-                    in srgb,
-                    var(--accent) 20%,
-                    transparent
-                );
+                0 0 18px var(--glow);
         }
 
         .artwork-index,
@@ -926,7 +736,6 @@
             color: var(--muted);
 
             font-size: 0.58rem;
-
             letter-spacing: 0.15em;
         }
 
@@ -942,40 +751,29 @@
             text-align: right;
         }
 
+        /* PLAYER CARD */
+
         .player-card {
             width: 100%;
             max-width: 560px;
-
             min-width: 0;
 
             margin: 0 auto;
 
-            padding:
-                clamp(
-                    22px,
-                    4vw,
-                    38px
-                );
+            padding: clamp(22px, 4vw, 38px);
 
-            border:
-                1px solid
-                var(--line);
+            border: 1px solid var(--line);
 
             background:
                 linear-gradient(
                     145deg,
-                    rgba(17, 38, 31, 0.8),
+                    var(--panel),
                     rgba(6, 15, 12, 0.8)
                 );
 
             box-shadow:
                 0 25px 80px var(--shadow),
-                inset 0 1px 0
-                color-mix(
-                    in srgb,
-                    var(--accent) 4%,
-                    transparent
-                );
+                inset 0 1px 0 var(--glow);
 
             backdrop-filter: blur(16px);
         }
@@ -984,7 +782,6 @@
             color: var(--accent);
 
             font-size: 0.62rem;
-
             letter-spacing: 0.2em;
 
             margin-bottom: 17px;
@@ -995,12 +792,7 @@
 
             color: var(--text);
 
-            font-size:
-                clamp(
-                    1.2rem,
-                    2.5vw,
-                    1.7rem
-                );
+            font-size: clamp(1.2rem, 2.5vw, 1.7rem);
 
             line-height: 1.35;
 
@@ -1023,44 +815,31 @@
             color: var(--muted);
 
             font-size: 0.7rem;
-
             letter-spacing: 0.1em;
         }
 
-        /* =========================
-           CANVAS VISUALIZER
-        ========================== */
+        /* CANVAS VISUALIZER */
 
-        .visualizer {
+        .visualizer-frame {
             position: relative;
 
             width: 100%;
 
-            height: 130px;
+            height: 145px;
 
             margin: 30px 0 20px;
 
-            border-top:
-                1px solid
-                var(--line);
-
-            border-bottom:
-                1px solid
-                var(--line);
-
-            overflow: hidden;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
 
             background:
                 linear-gradient(
-                    to bottom,
-                    transparent,
-                    color-mix(
-                        in srgb,
-                        var(--accent) 2%,
-                        transparent
-                    ),
-                    transparent
+                    180deg,
+                    rgba(0, 0, 0, 0.18),
+                    rgba(0, 0, 0, 0.35)
                 );
+
+            overflow: hidden;
         }
 
         #visualizerCanvas {
@@ -1073,12 +852,12 @@
         .visualizer-label {
             position: absolute;
 
-            top: 7px;
-            left: 9px;
+            top: 9px;
+            left: 12px;
 
             color: var(--dim);
 
-            font-size: 0.48rem;
+            font-size: 0.52rem;
 
             letter-spacing: 0.12em;
 
@@ -1088,31 +867,33 @@
         .visualizer-mode {
             position: absolute;
 
-            top: 7px;
-            right: 9px;
+            right: 10px;
+            top: 8px;
+
+            border: 1px solid var(--line);
+
+            padding: 4px 7px;
 
             color: var(--dim);
 
+            background: rgba(0, 0, 0, 0.2);
+
             font-size: 0.48rem;
 
-            letter-spacing: 0.12em;
+            letter-spacing: 0.1em;
 
             pointer-events: none;
         }
 
-        /* =========================
-           TIME / PROGRESS
-        ========================== */
+        /* PROGRESS */
 
         .time-row {
             display: flex;
-
             justify-content: space-between;
 
             color: var(--muted);
 
             font-size: 0.65rem;
-
             letter-spacing: 0.08em;
 
             margin-bottom: 10px;
@@ -1120,15 +901,9 @@
 
         .progress-track {
             width: 100%;
-
             height: 5px;
 
-            background:
-                color-mix(
-                    in srgb,
-                    var(--accent) 10%,
-                    transparent
-                );
+            background: var(--line);
 
             cursor: pointer;
 
@@ -1137,30 +912,21 @@
 
         .progress-fill {
             width: 0%;
-
             height: 100%;
 
             background: var(--accent);
 
             box-shadow:
-                0 0 12px
-                color-mix(
-                    in srgb,
-                    var(--accent) 50%,
-                    transparent
-                );
+                0 0 12px var(--glow);
 
             transition:
                 width 0.08s linear;
         }
 
-        /* =========================
-           CONTROLS
-        ========================== */
+        /* CONTROLS */
 
         .controls {
             display: flex;
-
             align-items: center;
             justify-content: center;
 
@@ -1172,22 +938,14 @@
         .control-button,
         .play-button {
             display: flex;
-
             align-items: center;
             justify-content: center;
 
-            border:
-                1px solid
-                var(--line);
+            border: 1px solid var(--line);
 
             color: var(--muted);
 
-            background:
-                color-mix(
-                    in srgb,
-                    var(--accent) 2.5%,
-                    transparent
-                );
+            background: rgba(114, 251, 209, 0.025);
 
             transition:
                 color 0.2s ease,
@@ -1213,12 +971,7 @@
 
             font-size: 1.05rem;
 
-            background:
-                color-mix(
-                    in srgb,
-                    var(--accent) 7%,
-                    transparent
-                );
+            background: var(--glow);
         }
 
         .control-button:hover,
@@ -1227,12 +980,7 @@
 
             border-color: var(--accent);
 
-            background:
-                color-mix(
-                    in srgb,
-                    var(--accent) 10%,
-                    transparent
-                );
+            background: var(--glow);
 
             transform: translateY(-2px);
         }
@@ -1242,21 +990,13 @@
 
             border-color: var(--accent);
 
-            background:
-                color-mix(
-                    in srgb,
-                    var(--accent) 10%,
-                    transparent
-                );
+            background: var(--glow);
         }
 
-        /* =========================
-           UTILITIES
-        ========================== */
+        /* UTILITIES */
 
         .player-utilities {
             display: flex;
-
             align-items: center;
             justify-content: space-between;
 
@@ -1264,9 +1004,7 @@
 
             padding-top: 20px;
 
-            border-top:
-                1px solid
-                var(--line);
+            border-top: 1px solid var(--line);
         }
 
         .utility-button {
@@ -1279,7 +1017,6 @@
             background: transparent;
 
             font-size: 0.62rem;
-
             letter-spacing: 0.1em;
 
             transition:
@@ -1293,7 +1030,6 @@
 
         .volume-control {
             display: flex;
-
             align-items: center;
 
             gap: 12px;
@@ -1303,13 +1039,11 @@
             color: var(--muted);
 
             font-size: 0.6rem;
-
             letter-spacing: 0.1em;
         }
 
         #volumeSlider {
             width: 100px;
-
             max-width: 100%;
 
             accent-color: var(--accent);
@@ -1317,45 +1051,38 @@
             cursor: pointer;
         }
 
-        /* =========================
-           VAULT SETTINGS
-        ========================== */
+        /* VISUAL / CRT SETTINGS */
 
-        .vault-settings {
+        .visual-settings {
             display: grid;
 
             grid-template-columns:
-                repeat(
-                    2,
-                    minmax(0, 1fr)
-                );
+                minmax(0, 1fr)
+                minmax(0, 1fr);
 
             gap: 10px;
 
-            margin-top: 16px;
+            margin-top: 14px;
 
-            padding-top: 16px;
+            padding-top: 15px;
 
-            border-top:
-                1px solid
-                var(--line);
+            border-top: 1px solid var(--line);
         }
 
         .setting-button {
-            min-height: 36px;
+            border: 1px solid var(--line);
 
-            border:
-                1px solid
-                var(--line);
+            padding: 8px 9px;
 
-            color: var(--muted);
+            color: var(--dim);
 
-            background:
-                rgba(0, 0, 0, 0.14);
+            background: rgba(0, 0, 0, 0.12);
 
-            font-size: 0.55rem;
+            font-size: 0.52rem;
 
             letter-spacing: 0.08em;
+
+            text-align: left;
 
             transition:
                 color 0.2s ease,
@@ -1369,72 +1096,10 @@
 
             border-color: var(--accent);
 
-            background:
-                color-mix(
-                    in srgb,
-                    var(--accent) 7%,
-                    transparent
-                );
+            background: var(--glow);
         }
 
-        .theme-control {
-            grid-column: 1 / -1;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 12px;
-
-            min-width: 0;
-
-            padding: 7px 9px;
-
-            border:
-                1px solid
-                var(--line);
-
-            color: var(--muted);
-
-            font-size: 0.55rem;
-
-            letter-spacing: 0.08em;
-        }
-
-        #themeSelect {
-            min-width: 0;
-
-            max-width: 100%;
-
-            padding: 6px 8px;
-
-            border:
-                1px solid
-                var(--line);
-
-            color: var(--accent);
-
-            background:
-                var(--panel-solid);
-
-            font-size: 0.55rem;
-
-            letter-spacing: 0.05em;
-
-            cursor: pointer;
-        }
-
-        #themeSelect option {
-            background: var(--panel-solid);
-
-            color: var(--text);
-        }
-
-        /* =========================
-           PLAYLIST
-        ========================== */
+        /* PLAYLIST */
 
         .playlist {
             width: 100%;
@@ -1445,16 +1110,12 @@
 
             padding-top: 25px;
 
-            border-top:
-                1px solid
-                var(--line);
+            border-top: 1px solid var(--line);
         }
 
         .playlist-header {
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
 
             gap: 15px;
@@ -1466,7 +1127,6 @@
             color: var(--text);
 
             font-size: 0.65rem;
-
             letter-spacing: 0.16em;
         }
 
@@ -1474,7 +1134,6 @@
             color: var(--muted);
 
             font-size: 0.58rem;
-
             letter-spacing: 0.1em;
 
             white-space: nowrap;
@@ -1503,12 +1162,7 @@
             padding: 13px 10px;
 
             border-bottom:
-                1px solid
-                color-mix(
-                    in srgb,
-                    var(--accent) 7%,
-                    transparent
-                );
+                1px solid var(--line);
 
             color: var(--muted);
 
@@ -1522,23 +1176,13 @@
         .playlist-item:hover {
             color: var(--text);
 
-            background:
-                color-mix(
-                    in srgb,
-                    var(--accent) 4%,
-                    transparent
-                );
+            background: var(--glow);
         }
 
         .playlist-item.active {
             color: var(--accent);
 
-            background:
-                color-mix(
-                    in srgb,
-                    var(--accent) 6%,
-                    transparent
-                );
+            background: var(--glow);
         }
 
         .playlist-index {
@@ -1571,9 +1215,7 @@
             white-space: nowrap;
         }
 
-        /* =========================
-           ARCHIVE
-        ========================== */
+        /* ARCHIVE */
 
         .archive-grid {
             width: 100%;
@@ -1583,17 +1225,9 @@
             display: grid;
 
             grid-template-columns:
-                repeat(
-                    3,
-                    minmax(0, 1fr)
-                );
+                repeat(3, minmax(0, 1fr));
 
-            gap:
-                clamp(
-                    16px,
-                    2.5vw,
-                    28px
-                );
+            gap: clamp(16px, 2.5vw, 28px);
         }
 
         .archive-card {
@@ -1602,16 +1236,9 @@
 
             padding: 27px;
 
-            border:
-                1px solid
-                var(--line);
+            border: 1px solid var(--line);
 
-            background:
-                color-mix(
-                    in srgb,
-                    var(--panel-solid) 45%,
-                    transparent
-                );
+            background: rgba(10, 24, 20, 0.45);
 
             transition:
                 border-color 0.25s ease,
@@ -1622,12 +1249,7 @@
         .archive-card:hover {
             border-color: var(--line-bright);
 
-            background:
-                color-mix(
-                    in srgb,
-                    var(--panel-solid) 65%,
-                    transparent
-                );
+            background: var(--glow);
 
             transform: translateY(-4px);
         }
@@ -1636,7 +1258,6 @@
             color: var(--dim);
 
             font-size: 0.58rem;
-
             letter-spacing: 0.12em;
         }
 
@@ -1672,9 +1293,7 @@
             line-height: 1.9;
         }
 
-        /* =========================
-           TERMINAL
-        ========================== */
+        /* TERMINAL */
 
         .terminal {
             width: 100%;
@@ -1683,20 +1302,16 @@
 
             overflow: hidden;
 
-            border:
-                1px solid
-                var(--line);
+            border: 1px solid var(--line);
 
             background: #030806;
 
             box-shadow:
-                0 20px 60px
-                rgba(0, 0, 0, 0.25);
+                0 20px 60px rgba(0, 0, 0, 0.25);
         }
 
         .terminal-header {
             display: flex;
-
             align-items: center;
 
             gap: 7px;
@@ -1705,16 +1320,9 @@
 
             padding: 0 16px;
 
-            border-bottom:
-                1px solid
-                var(--line);
+            border-bottom: 1px solid var(--line);
 
-            background:
-                color-mix(
-                    in srgb,
-                    var(--accent) 2.5%,
-                    transparent
-                );
+            background: var(--glow);
         }
 
         .terminal-dot {
@@ -1769,26 +1377,34 @@
         }
 
         .terminal-cursor {
-            display: inline-block;
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    vertical-align: -2px;
+    background: var(--accent);
 
-            width: 8px;
-            height: 14px;
+    animation:
+        smoothBlink
+        1.2s
+        ease-in-out
+        infinite;
+}
 
-            vertical-align: -2px;
+@keyframes smoothBlink {
+    0%,
+    100% {
+        opacity: 1;
+    }
 
-            background: var(--accent);
+    50% {
+        opacity: 0;
+    }
+}
 
-            animation:
-                blink 1s steps(2, start) infinite;
-        }
-
-        /* =========================
-           SECRET / FOOTER
-        ========================== */
+        /* SECRET */
 
         .secret-area {
             display: flex;
-
             justify-content: center;
 
             padding: 70px 0 90px;
@@ -1817,13 +1433,13 @@
             color: var(--accent);
         }
 
+        /* FOOTER */
+
         footer {
             width: 100%;
 
             display: flex;
-
             align-items: center;
-
             justify-content: center;
 
             flex-wrap: wrap;
@@ -1832,9 +1448,7 @@
 
             padding: 28px 0 40px;
 
-            border-top:
-                1px solid
-                var(--line);
+            border-top: 1px solid var(--line);
 
             color: var(--dim);
 
@@ -1845,13 +1459,15 @@
             text-align: center;
         }
 
-        /* =========================
-           AMBIENT MODE
-        ========================== */
+        /* AMBIENT MODE */
 
         .ambient-mode .hero-orb {
             animation:
-                ambientOrb 7s ease-in-out infinite alternate;
+                ambientOrb
+                7s
+                ease-in-out
+                infinite
+                alternate;
         }
 
         .ambient-mode .artwork-ring {
@@ -1863,71 +1479,14 @@
         }
 
         .ambient-mode .player-card {
-            border-color:
-                color-mix(
-                    in srgb,
-                    var(--accent) 30%,
-                    transparent
-                );
+            border-color: var(--line-bright);
 
             box-shadow:
-                0 25px 90px
-                color-mix(
-                    in srgb,
-                    var(--accent-soft) 10%,
-                    transparent
-                ),
-                inset 0 1px 0
-                color-mix(
-                    in srgb,
-                    var(--accent) 8%,
-                    transparent
-                );
+                0 25px 90px var(--glow),
+                inset 0 1px 0 var(--glow);
         }
 
-        /* =========================
-           ANIMATIONS
-        ========================== */
-
-        @keyframes metaPulse {
-            0%,
-            100% {
-                box-shadow:
-                    0 0 12px
-                    color-mix(
-                        in srgb,
-                        var(--accent) 8%,
-                        transparent
-                    );
-            }
-
-            50% {
-                box-shadow:
-                    0 0 28px
-                    color-mix(
-                        in srgb,
-                        var(--accent) 20%,
-                        transparent
-                    );
-            }
-        }
-
-        @keyframes metaScan {
-            0% {
-                transform: scaleX(0.2);
-                opacity: 0.35;
-            }
-
-            50% {
-                transform: scaleX(1);
-                opacity: 1;
-            }
-
-            100% {
-                transform: scaleX(0.2);
-                opacity: 0.35;
-            }
-        }
+        /* ANIMATIONS */
 
         @keyframes slowSpin {
             from {
@@ -1945,13 +1504,24 @@
             }
         }
 
+        @keyframes smoothBlink {
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
         @keyframes ambientOrb {
             from {
                 transform:
                     translate(-50%, -42%)
                     scale(1);
 
-                opacity: 0.7;
+                opacity: 0.35;
             }
 
             to {
@@ -1959,28 +1529,37 @@
                     translate(-50%, -42%)
                     scale(1.08);
 
-                opacity: 1;
+                opacity: 0.7;
             }
         }
 
-        /* =========================
-           RESPONSIVE
-        ========================== */
+        @keyframes screenFlicker {
+            0% {
+                opacity: 0.92;
+            }
+
+            50% {
+                opacity: 0.98;
+            }
+
+            100% {
+                opacity: 0.94;
+            }
+        }
+
+        /* RESPONSIVE */
 
         @media (max-width: 900px) {
             .page {
-                width:
-                    min(
-                        100% - 28px,
-                        760px
-                    );
+                width: min(100% - 28px, 760px);
             }
 
             .hero {
                 min-height: 540px;
 
                 padding:
-                    80px 0 90px;
+                    80px 0
+                    90px;
             }
 
             .player-layout {
@@ -1990,11 +1569,7 @@
             }
 
             .artwork {
-                width:
-                    min(
-                        100%,
-                        360px
-                    );
+                width: min(100%, 360px);
             }
 
             .player-card {
@@ -2003,20 +1578,13 @@
 
             .archive-grid {
                 grid-template-columns:
-                    repeat(
-                        2,
-                        minmax(0, 1fr)
-                    );
+                    repeat(2, minmax(0, 1fr));
             }
         }
 
         @media (max-width: 600px) {
             .page {
-                width:
-                    calc(
-                        100% - 24px
-                    );
-
+                width: calc(100% - 24px);
                 max-width: none;
             }
 
@@ -2043,11 +1611,32 @@
                 letter-spacing: 0.07em;
             }
 
+            .header-theme-control {
+                top: calc(100% + 8px);
+
+                padding: 4px 5px;
+
+                gap: 6px;
+            }
+
+            .header-theme-control label {
+                font-size: 0.42rem;
+            }
+
+            #themeSelect {
+                min-width: 108px;
+
+                padding: 4px 5px;
+
+                font-size: 0.43rem;
+            }
+
             .hero {
                 min-height: 500px;
 
                 padding:
-                    70px 0 80px;
+                    70px 0
+                    80px;
             }
 
             .eyebrow {
@@ -2088,15 +1677,15 @@
             }
 
             .artwork {
-                width:
-                    min(
-                        100%,
-                        300px
-                    );
+                width: min(100%, 300px);
             }
 
             .player-card {
                 padding: 22px 17px;
+            }
+
+            .visualizer-frame {
+                height: 125px;
             }
 
             .controls {
@@ -2124,24 +1713,15 @@
             .volume-control {
                 width: 100%;
 
-                justify-content:
-                    space-between;
+                justify-content: space-between;
             }
 
             #volumeSlider {
                 width: 150px;
             }
 
-            .vault-settings {
+            .visual-settings {
                 grid-template-columns: 1fr;
-            }
-
-            .theme-control {
-                grid-column: auto;
-            }
-
-            .visualizer {
-                height: 115px;
             }
 
             .playlist-item {
@@ -2190,10 +1770,7 @@
 
         @media (max-width: 380px) {
             .page {
-                width:
-                    calc(
-                        100% - 18px
-                    );
+                width: calc(100% - 18px);
             }
 
             .brand {
@@ -2204,16 +1781,16 @@
                 font-size: 0.48rem;
             }
 
+            .header-theme-control {
+                right: 0;
+            }
+
             .hero h1 {
                 font-size: 3.7rem;
             }
 
             .artwork {
-                width:
-                    min(
-                        100%,
-                        260px
-                    );
+                width: min(100%, 260px);
             }
 
             .controls {
@@ -2251,2473 +1828,2253 @@
 
 <body>
 
-<div class="page">
+    <div
+        class="crt-overlay"
+        id="crtOverlay"
+        aria-hidden="true">
+    </div>
 
-    <!-- =========================
-         HEADER
-    ========================== -->
+    <div class="page">
 
-    <header>
+        <header>
 
-        <div class="brand">
-            <span class="brand-mark"></span>
-            PEPPERMINTGRAVE
-        </div>
-
-        <div class="header-right">
-
-            <div class="header-status">
-                ARCHIVE:
-                <span id="headerStatus">READY</span>
-                // MUSIC VAULT
+            <div class="brand">
+                <span class="brand-mark"></span>
+                MUSIC HOLDER
             </div>
 
-        </div>
+            <div class="header-right">
 
-    </header>
-
-
-    <main>
-
-        <!-- =========================
-             HERO
-        ========================== -->
-
-        <section class="hero">
-
-            <div class="eyebrow">
-                // PERSONAL AUDIO ARCHIVE
-            </div>
-
-            <h1>
-                ENTER<br>
-                THE <span class="accent">VAULT</span>
-            </h1>
-
-            <p class="hero-description">
-                A quiet place for sound. Original ambient transmissions,
-                nostalgic fragments, and midnight frequencies collected
-                under one roof.
-            </p>
-
-            <div class="hero-meta">
-
-                <span class="meta-pill">
-                    PeppermintGrave
-                </span>
-
-                <span class="meta-pill">
-                    Original Music
-                </span>
-
-                <span class="meta-pill">
-                    Ambient Sounds
-                </span>
-
-                <span class="meta-pill">
-                    Local Archive
-                </span>
-
-            </div>
-
-            <div class="hero-orb"></div>
-
-        </section>
-
-
-        <!-- =========================
-             TRANSMISSION
-        ========================== -->
-
-        <section class="section">
-
-            <div class="section-heading">
-
-                <span class="section-number">
-                    01
-                </span>
-
-                <span class="section-title">
-                    TRANSMISSION
-                </span>
-
-                <div class="section-line"></div>
-
-            </div>
-
-
-            <div class="player-layout">
-
-
-                <!-- ARTWORK -->
-
-                <div class="artwork">
-
-                    <div class="artwork-grid"></div>
-
-                    <div class="artwork-ring"></div>
-
-                    <div class="disc">
-
-                        <div class="disc-center">
-                        </div>
-
-                    </div>
-
-                    <div class="artwork-index">
-                    </div>
-
-                    <div class="artwork-caption">
-                    </div>
-
+                <div class="header-status">
+                    SYSTEM:
+                    <span id="headerStatus">READY</span>
+                    // AUDIO ARCHIVE
                 </div>
 
+                <div class="header-theme-control">
 
-                <!-- PLAYER -->
+                    <label for="themeSelect">
+                        TERMINAL THEME
+                    </label>
 
-                <div class="player-card">
+                    <select id="themeSelect">
 
+                        <option value="mint">
+                            Mint Terminal
+                        </option>
 
-                    <div class="player-label">
-                        NOW TRANSMITTING
-                    </div>
+                        <option value="amber">
+                            Amber Monochrome
+                        </option>
 
+                        <option value="matrix">
+                            Matrix Green
+                        </option>
 
-                    <div
-                        class="song-title idle"
-                        id="songTitle">
+                        <option value="cyan">
+                            Cyberpunk Cyan
+                        </option>
 
-                        Not Playing Yet
-
-                    </div>
-
-
-                    <div class="song-artist">
-                        PeppermintGrave
-                    </div>
-
-
-                    <!-- LIVE CANVAS -->
-
-                    <div
-                        class="visualizer"
-                        id="visualizer">
-
-                        <canvas
-                            id="visualizerCanvas">
-                        </canvas>
-
-                        <div class="visualizer-label">
-                            AUDIO SPECTRUM
-                        </div>
-
-                        <div
-                            class="visualizer-mode"
-                            id="visualizerMode">
-
-                            FREQUENCY
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- TIME -->
-
-                    <div class="time-row">
-
-                        <span id="currentTime">
-                            00:00
-                        </span>
-
-                        <span id="duration">
-                            00:00
-                        </span>
-
-                    </div>
-
-
-                    <!-- PROGRESS -->
-
-                    <div
-                        class="progress-track"
-                        id="progressTrack">
-
-                        <div
-                            class="progress-fill"
-                            id="progressFill">
-                        </div>
-
-                    </div>
-
-
-                    <!-- PLAYER CONTROLS -->
-
-                    <div class="controls">
-
-                        <button
-                            class="control-button"
-                            id="shuffleButton"
-                            title="Shuffle"
-                            aria-label="Shuffle">
-
-                            ⤨
-
-                        </button>
-
-
-                        <button
-                            class="control-button"
-                            id="previousButton"
-                            title="Previous"
-                            aria-label="Previous track">
-
-                            ◀
-
-                        </button>
-
-
-                        <button
-                            class="play-button"
-                            id="playButton"
-                            title="Play"
-                            aria-label="Play or pause">
-
-                            ▶
-
-                        </button>
-
-
-                        <button
-                            class="control-button"
-                            id="nextButton"
-                            title="Next"
-                            aria-label="Next track">
-
-                            ▶
-
-                        </button>
-
-
-                        <button
-                            class="control-button"
-                            id="repeatButton"
-                            title="Repeat"
-                            aria-label="Repeat">
-
-                            ↻
-
-                        </button>
-
-                    </div>
-
-
-                    <!-- UTILITIES -->
-
-                    <div class="player-utilities">
-
-                        <button
-                            class="utility-button"
-                            id="ambientButton">
-
-                            AMBIENT MODE
-
-                        </button>
-
-
-                        <div class="volume-control">
-
-                            <span>
-                                VOL
-                            </span>
-
-                            <input
-                                type="range"
-                                id="volumeSlider"
-                                min="0"
-                                max="1"
-                                step="0.01"
-                                value="0.75"
-                                aria-label="Volume">
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- CRT / THEME SETTINGS -->
-
-                    <div class="vault-settings">
-
-                        <button
-                            class="setting-button"
-                            id="visualizerToggle">
-
-                            VISUALIZER:
-                            FREQUENCY
-
-                        </button>
-
-
-                        <button
-                            class="setting-button"
-                            id="scanlineToggle">
-
-                            CRT SCANLINES:
-                            OFF
-
-                        </button>
-
-
-                        <button
-                            class="setting-button"
-                            id="flickerToggle">
-
-                            SCREEN FLICKER:
-                            OFF
-
-                        </button>
-
-
-                        <button
-                            class="setting-button"
-                            id="curvatureToggle">
-
-                            CRT CURVATURE:
-                            OFF
-
-                        </button>
-
-
-                        <label class="theme-control">
-
-                            <span>
-                                TERMINAL THEME
-                            </span>
-
-                            <select id="themeSelect">
-
-                                <option value="peppermint">
-                                    DEFAULT
-                                </option>
-
-                                <option value="amber">
-                                    AMBER MONOCHROME
-                                </option>
-
-                                <option value="matrix">
-                                    MATRIX GREEN
-                                </option>
-
-                                <option value="cyan">
-                                    CYBERPUNK CYAN
-                                </option>
-
-                            </select>
-
-                        </label>
-
-                    </div>
-
-
-                    <!-- PLAYLIST -->
-
-                    <div class="playlist">
-
-                        <div class="playlist-header">
-
-                            <div class="playlist-heading">
-                                MIDNIGHT RECORDINGS
-                            </div>
-
-                            <div
-                                class="playlist-count"
-                                id="playlistCount">
-
-                                00 TRANSMISSIONS
-
-                            </div>
-
-                        </div>
-
-
-                        <div id="playlist"></div>
-
-                    </div>
+                    </select>
 
                 </div>
 
             </div>
 
-        </section>
+        </header>
 
+        <main>
 
-        <!-- =========================
-             ARCHIVE FRAGMENTS
-        ========================== -->
+            <section class="hero">
 
-        <section class="section">
+                <div class="eyebrow">
+                    // PERSONAL AUDIO STORAGE SYSTEM
+                </div>
 
-            <div class="section-heading">
+                <h1>
+                    HOLD<br>
+                    THE <span class="accent">SOUND</span>
+                </h1>
 
-                <span class="section-number">
-                    02
-                </span>
+                <p class="hero-description">
+                    A quiet digital space for songs, fragments,
+                    memories, and frequencies worth keeping.
+                    Nothing is lost while the signal remains.
+                </p>
 
-                <span class="section-title">
-                    ARCHIVE FRAGMENTS
-                </span>
+                <div class="hero-meta">
 
-                <div class="section-line"></div>
+                    <span class="meta-pill">
+                        MUSIC HOLDER
+                    </span>
 
-            </div>
+                    <span class="meta-pill">
+                        ORIGINAL RECORDINGS
+                    </span>
 
+                    <span class="meta-pill">
+                        AUDIO ARCHIVE
+                    </span>
 
-            <div class="archive-grid">
-
-
-                <article class="archive-card">
-
-                    <div class="archive-number">
-                        Fragment-01
-                    </div>
-
-                    <div class="archive-icon">
-                        ◌
-                    </div>
-
-                    <h3>
-                        Static
-                    </h3>
-
-                    <p>
-                        A signal buried beneath the noise.
-                        Some frequencies refuse to disappear.
-                    </p>
-
-                </article>
-
-
-                <article class="archive-card">
-
-                    <div class="archive-number">
-                        Fragment-02
-                    </div>
-
-                    <div class="archive-icon">
-                        ◇
-                    </div>
-
-                    <h3>
-                        Memory
-                    </h3>
-
-                    <p>
-                        Some songs feel less like recordings
-                        and more like places you accidentally remember.
-                    </p>
-
-                </article>
-
-
-                <article class="archive-card">
-
-                    <div class="archive-number">
-                        Fragment-03
-                    </div>
-
-                    <div class="archive-icon">
-                        ∅
-                    </div>
-
-                    <h3>
-                        Somewhere
-                    </h3>
-
-                    <p>
-                        There is a room at the end of the signal.
-                        The door has never been locked.
-                    </p>
-
-                </article>
-
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             TERMINAL
-        ========================== -->
-
-        <section class="section">
-
-            <div class="section-heading">
-
-                <span class="section-number">
-                    03
-                </span>
-
-                <span class="section-title">
-                    RECOVERED SYSTEM
-                </span>
-
-                <div class="section-line"></div>
-
-            </div>
-
-
-            <div class="terminal">
-
-                <div class="terminal-header">
-
-                    <span class="terminal-dot"></span>
-                    <span class="terminal-dot"></span>
-                    <span class="terminal-dot"></span>
-
-                    <span class="terminal-title">
-                        /peppermint/music-vault/audio
+                    <span class="meta-pill">
+                        LOCAL STORAGE
                     </span>
 
                 </div>
 
+                <div class="hero-orb"></div>
 
-                <div class="terminal-body">
+            </section>
 
+            <section class="section">
 
-                    <div>
+                <div class="section-heading">
 
-                        <span class="terminal-prompt">
-                            peppermint@vault:~$
-                        </span>
+                    <span class="section-number">
+                        01
+                    </span>
 
-                        <span class="terminal-command">
-                            scan --music
-                        </span>
+                    <span class="section-title">
+                        CURRENT SIGNAL
+                    </span>
 
-                    </div>
-
-
-                    <div class="terminal-output">
-                        Searching local archive...
-                    </div>
-
-
-                    <div
-                        class="terminal-output"
-                        id="terminalStatus">
-
-                        Waiting for transmission data...
-
-                    </div>
-
-
-                    <div class="terminal-output">
-                        Author: PeppermintGrave
-                    </div>
-
-
-                    <div class="terminal-output">
-                        Archive type: Original recordings
-                    </div>
-
-
-                    <div class="terminal-output">
-                        External files: audio/*.mp3
-                    </div>
-
-
-                    <br>
-
-
-                    <div>
-
-                        <span class="terminal-prompt">
-                            peppermint@vault:~$
-                        </span>
-
-                        <span class="terminal-command">
-                            status
-                        </span>
-
-                    </div>
-
-
-                    <div class="terminal-output">
-                        The music is still here.
-                    </div>
-
-
-                    <br>
-
-
-                    <div>
-
-                        <span class="terminal-prompt">
-                            peppermint@vault:~$
-                        </span>
-
-                        <span class="terminal-cursor"></span>
-
-                    </div>
-
+                    <div class="section-line"></div>
 
                 </div>
 
+                <div class="player-layout">
+
+                    <div class="artwork">
+
+                        <div class="artwork-grid"></div>
+
+                        <div class="artwork-ring"></div>
+
+                        <div class="disc">
+
+                            <div class="disc-center">
+                            </div>
+
+                        </div>
+
+                        <div class="artwork-index">
+                            HOLDER // 001
+                        </div>
+
+                        <div class="artwork-caption">
+                            SOUND<br>
+                            PRESERVED
+                        </div>
+
+                    </div>
+
+                    <div class="player-card">
+
+                        <div class="player-label">
+                            NOW PLAYING
+                        </div>
+
+                        <div
+                            class="song-title idle"
+                            id="songTitle">
+
+                            Nothing Loaded
+
+                        </div>
+
+                        <div class="song-artist">
+                            MUSIC HOLDER // ORIGINAL AUDIO
+                        </div>
+
+                        <div class="visualizer-frame">
+
+                            <canvas
+                                id="visualizerCanvas">
+                            </canvas>
+
+                            <div class="visualizer-label">
+                                LIVE AUDIO ANALYSIS
+                            </div>
+
+                            <div
+                                class="visualizer-mode"
+                                id="visualizerModeLabel">
+
+                                FREQUENCY
+
+                            </div>
+
+                        </div>
+
+                        <div class="time-row">
+
+                            <span id="currentTime">
+                                00:00
+                            </span>
+
+                            <span id="duration">
+                                00:00
+                            </span>
+
+                        </div>
+
+                        <div
+                            class="progress-track"
+                            id="progressTrack">
+
+                            <div
+                                class="progress-fill"
+                                id="progressFill">
+                            </div>
+
+                        </div>
+
+                        <div class="controls">
+
+                            <button
+                                class="control-button"
+                                id="shuffleButton"
+                                title="Shuffle"
+                                aria-label="Shuffle">
+
+                                ⤨
+
+                            </button>
+
+                            <button
+                                class="control-button"
+                                id="previousButton"
+                                title="Previous"
+                                aria-label="Previous track">
+
+                                ◀
+
+                            </button>
+
+                            <button
+                                class="play-button"
+                                id="playButton"
+                                title="Play"
+                                aria-label="Play or pause">
+
+                                ▶
+
+                            </button>
+
+                            <button
+                                class="control-button"
+                                id="nextButton"
+                                title="Next"
+                                aria-label="Next track">
+
+                                ▶
+
+                            </button>
+
+                            <button
+                                class="control-button"
+                                id="repeatButton"
+                                title="Repeat"
+                                aria-label="Repeat">
+
+                                ↻
+
+                            </button>
+
+                        </div>
+
+                        <div class="player-utilities">
+
+                            <button
+                                class="utility-button"
+                                id="ambientButton">
+
+                                AMBIENT MODE
+
+                            </button>
+
+                            <div class="volume-control">
+
+                                <span>
+                                    VOL
+                                </span>
+
+                                <input
+                                    type="range"
+                                    id="volumeSlider"
+                                    min="0"
+                                    max="1"
+                                    step="0.01"
+                                    value="0.75"
+                                    aria-label="Volume">
+
+                            </div>
+
+                        </div>
+
+                        <div class="visual-settings">
+
+                            <button
+                                class="setting-button"
+                                id="visualizerToggle">
+
+                                MODE:
+                                <span id="visualizerToggleText">
+                                    FREQUENCY
+                                </span>
+
+                            </button>
+
+                            <button
+                                class="setting-button"
+                                id="scanlinesButton">
+
+                                SCANLINES:
+                                <span id="scanlinesText">
+                                    OFF
+                                </span>
+
+                            </button>
+
+                            <button
+                                class="setting-button"
+                                id="flickerButton">
+
+                                FLICKER:
+                                <span id="flickerText">
+                                    OFF
+                                </span>
+
+                            </button>
+
+                            <button
+                                class="setting-button"
+                                id="curvatureButton">
+
+                                CRT CURVE:
+                                <span id="curvatureText">
+                                    OFF
+                                </span>
+
+                            </button>
+
+                        </div>
+
+                        <div class="playlist">
+
+                            <div class="playlist-header">
+
+                                <div class="playlist-heading">
+                                    MUSIC HOLDER // LIBRARY
+                                </div>
+
+                                <div
+                                    class="playlist-count"
+                                    id="playlistCount">
+
+                                    00 RECORDINGS
+
+                                </div>
+
+                            </div>
+
+                            <div id="playlist"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="section">
+
+                <div class="section-heading">
+
+                    <span class="section-number">
+                        02
+                    </span>
+
+                    <span class="section-title">
+                        HOLDER FRAGMENTS
+                    </span>
+
+                    <div class="section-line"></div>
+
+                </div>
+
+                <div class="archive-grid">
+
+                    <article class="archive-card">
+
+                        <div class="archive-number">
+                            HOLDER-01
+                        </div>
+
+                        <div class="archive-icon">
+                            ◌
+                        </div>
+
+                        <h3>
+                            Signal
+                        </h3>
+
+                        <p>
+                            Every recording leaves a trace.
+                            Some signals are quiet enough
+                            that you only notice them later.
+                        </p>
+
+                    </article>
+
+                    <article class="archive-card">
+
+                        <div class="archive-number">
+                            HOLDER-02
+                        </div>
+
+                        <div class="archive-icon">
+                            ◇
+                        </div>
+
+                        <h3>
+                            Memory
+                        </h3>
+
+                        <p>
+                            Music has a strange way of keeping
+                            moments alive long after the moment
+                            itself has disappeared.
+                        </p>
+
+                    </article>
+
+                    <article class="archive-card">
+
+                        <div class="archive-number">
+                            HOLDER-03
+                        </div>
+
+                        <div class="archive-icon">
+                            ∅
+                        </div>
+
+                        <h3>
+                            Silence
+                        </h3>
+
+                        <p>
+                            Not every empty space is empty.
+                            Sometimes the quiet is part of
+                            the recording.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+            <section class="section">
+
+                <div class="section-heading">
+
+                    <span class="section-number">
+                        03
+                    </span>
+
+                    <span class="section-title">
+                        HOLDER TERMINAL
+                    </span>
+
+                    <div class="section-line"></div>
+
+                </div>
+
+                <div class="terminal">
+
+                    <div class="terminal-header">
+
+                        <span class="terminal-dot"></span>
+                        <span class="terminal-dot"></span>
+                        <span class="terminal-dot"></span>
+
+                        <span class="terminal-title">
+                            /music-holder/archive/audio
+                        </span>
+
+                    </div>
+
+                    <div class="terminal-body">
+
+                        <div>
+
+                            <span class="terminal-prompt">
+                                peppermint@music:~$
+                            </span>
+
+                            <span class="terminal-command">
+                                scan --library
+                            </span>
+
+                        </div>
+
+                        <div class="terminal-output">
+                            Searching Music Holder archive...
+                        </div>
+
+                        <div
+                            class="terminal-output"
+                            id="terminalStatus">
+
+                            Waiting for audio signal...
+
+                        </div>
+
+                        <div class="terminal-output">
+                            System: Music Holder
+                        </div>
+
+                        <div class="terminal-output">
+                            Archive type: Personal recordings
+                        </div>
+
+                        <div class="terminal-output">
+                            Audio source: audio/*.mp3
+                        </div>
+
+                        <br>
+
+                        <div>
+
+                            <span class="terminal-prompt">
+                                peppermint@music:~$
+                            </span>
+
+                            <span class="terminal-command">
+                                status
+                            </span>
+
+                        </div>
+
+                        <div class="terminal-output">
+                            The holder is online.
+                        </div>
+
+                        <div class="terminal-output">
+                            Stored sounds remain available.
+                        </div>
+
+                        <br>
+
+                        <div>
+
+                            <span class="terminal-prompt">
+                                peppermint@music:~$
+                            </span>
+
+                            <span class="terminal-cursor"></span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <div class="secret-area">
+
+                <button
+                    class="secret-button"
+                    id="secretButton">
+
+                    [ THERE IS SOMETHING STILL PLAYING ]
+
+                </button>
+
             </div>
 
-        </section>
+        </main>
 
+        <footer>
 
-        <!-- SECRET -->
+            <div>
+                MUSIC HOLDER
+            </div>
 
-        <div class="secret-area">
+            <div>
+                PERSONAL AUDIO ARCHIVE
+            </div>
 
-            <button
-                class="secret-button"
-                id="secretButton">
+            <div>
+                HOLDER SYSTEM // 2026
+            </div>
 
-                [ THERE IS A SIGNAL BENEATH THIS PAGE ]
+        </footer>
 
-            </button>
+    </div>
 
-        </div>
+    <audio
+        id="audioPlayer"
+        preload="metadata">
+    </audio>
 
-    </main>
+    <script>
 
+        /* MUSIC LIBRARY */
 
-    <footer>
+        const MUSIC_LIBRARY = [
 
-        <div>
-            PEPPERMINTGRAVE©
-        </div>
+            {
+                title: "Paper Moons",
+                file: "audio/Paper Moons.mp3"
+            },
 
-        <div>
-            ORIGINAL MUSIC ARCHIVE
-        </div>
+            {
+                title: "When the Night Learns Your Name",
+                file: "audio/When the Night Learns Your Name.mp3"
+            },
 
-        <div>
-            MUSIC VAULT // 2026
-        </div>
+            {
+                title: "Old Notebook",
+                file: "audio/Old Notebook.mp3"
+            },
 
-    </footer>
+            {
+                title: "Where the Silence Grows",
+                file: "audio/Where the Silence Grows.mp3"
+            },
 
-</div>
+            {
+                title: "When You Still Knew Me",
+                file: "audio/When You Still Knew Me.mp3"
+            },
 
+            {
+                title: "Where the Daylight Ends",
+                file: "audio/Where the Daylight Ends.mp3"
+            },
 
-<!-- AUDIO -->
+            {
+                title: "From the Other Side of the Screen",
+                file: "audio/From the Other Side of the Screen.mp3"
+            },
 
-<audio
-    id="audioPlayer"
-    preload="metadata">
-</audio>
+            {
+                title: "Still Here",
+                file: "audio/Still Here.mp3"
+            },
 
+            {
+                title: "Static Skies",
+                file: "audio/Static Skies.mp3"
+            },
 
-<script>
-    /* =========================================================
-       MUSIC LIBRARY
-    ========================================================== */
+            {
+                title: "Mosslight Drift",
+                file: "audio/Mosslight Drift.mp3"
+            }
 
-    const MUSIC_LIBRARY = [
+        ];
 
-        {
-            title: "Paper Moons",
-            file: "audio/Paper Moons.mp3"
-        },
+        /* DOM REFERENCES */
 
-        {
-            title: "When the Night Learns Your Name",
-            file: "audio/When the Night Learns Your Name.mp3"
-        },
+        const audioPlayer =
+            document.getElementById("audioPlayer");
 
-        {
-            title: "Old Notebook",
-            file: "audio/Old Notebook.mp3"
-        },
+        const songTitle =
+            document.getElementById("songTitle");
 
-        {
-            title: "Where the Silence Grows",
-            file: "audio/Where the Silence Grows.mp3"
-        },
+        const currentTimeElement =
+            document.getElementById("currentTime");
 
-        {
-            title: "When You Still Knew Me",
-            file: "audio/When You Still Knew Me.mp3"
-        },
+        const durationElement =
+            document.getElementById("duration");
 
-        {
-            title: "Where the Daylight Ends",
-            file: "audio/Where the Daylight Ends.mp3"
-        },
+        const progressTrack =
+            document.getElementById("progressTrack");
 
-        {
-            title: "From the Other Side of the Screen",
-            file: "audio/From the Other Side of the Screen.mp3"
-        },
+        const progressFill =
+            document.getElementById("progressFill");
 
-        {
-            title: "Still Here",
-            file: "audio/Still Here.mp3"
-        },
+        const playlistElement =
+            document.getElementById("playlist");
 
-        {
-            title: "Static Skies",
-            file: "audio/Static Skies.mp3"
-        },
+        const playlistCount =
+            document.getElementById("playlistCount");
 
-        {
-            title: "Mosslight Drift",
-            file: "audio/Mosslight Drift.mp3"
-        }
+        const playButton =
+            document.getElementById("playButton");
 
-    ];
+        const previousButton =
+            document.getElementById("previousButton");
 
+        const nextButton =
+            document.getElementById("nextButton");
 
-    /* =========================================================
-       ELEMENTS
-    ========================================================== */
+        const shuffleButton =
+            document.getElementById("shuffleButton");
 
-    const audioPlayer =
-        document.getElementById("audioPlayer");
+        const repeatButton =
+            document.getElementById("repeatButton");
 
-    const songTitle =
-        document.getElementById("songTitle");
+        const ambientButton =
+            document.getElementById("ambientButton");
 
-    const currentTimeElement =
-        document.getElementById("currentTime");
+        const volumeSlider =
+            document.getElementById("volumeSlider");
 
-    const durationElement =
-        document.getElementById("duration");
+        const headerStatus =
+            document.getElementById("headerStatus");
 
-    const progressTrack =
-        document.getElementById("progressTrack");
+        const terminalStatus =
+            document.getElementById("terminalStatus");
 
-    const progressFill =
-        document.getElementById("progressFill");
+        const secretButton =
+            document.getElementById("secretButton");
 
-    const playlistElement =
-        document.getElementById("playlist");
+        const visualizerCanvas =
+            document.getElementById("visualizerCanvas");
 
-    const playlistCount =
-        document.getElementById("playlistCount");
-
-    const playButton =
-        document.getElementById("playButton");
-
-    const previousButton =
-        document.getElementById("previousButton");
-
-    const nextButton =
-        document.getElementById("nextButton");
-
-    const shuffleButton =
-        document.getElementById("shuffleButton");
-
-    const repeatButton =
-        document.getElementById("repeatButton");
-
-    const ambientButton =
-        document.getElementById("ambientButton");
-
-    const volumeSlider =
-        document.getElementById("volumeSlider");
-
-    const visualizer =
-        document.getElementById("visualizer");
-
-    const visualizerCanvas =
-        document.getElementById("visualizerCanvas");
-
-    const visualizerMode =
-        document.getElementById("visualizerMode");
-
-    const visualizerToggle =
-        document.getElementById("visualizerToggle");
-
-    const scanlineToggle =
-        document.getElementById("scanlineToggle");
-
-    const flickerToggle =
-        document.getElementById("flickerToggle");
-
-    const curvatureToggle =
-        document.getElementById("curvatureToggle");
-
-    const themeSelect =
-        document.getElementById("themeSelect");
-
-    const headerStatus =
-        document.getElementById("headerStatus");
-
-    const terminalStatus =
-        document.getElementById("terminalStatus");
-
-    const secretButton =
-        document.getElementById("secretButton");
-
-    const metaPills =
-        document.querySelectorAll(".meta-pill");
-
-
-    /* =========================================================
-       PLAYER STATE
-    ========================================================== */
-
-    let currentTrackIndex = 0;
-
-    let isShuffleEnabled = false;
-
-    let isRepeatEnabled = false;
-
-    let isAmbientEnabled = false;
-
-    let hasSelectedTrack = false;
-
-
-    /* =========================================================
-       VISUALIZER STATE
-    ========================================================== */
-
-    let audioContext = null;
-
-    let analyser = null;
-
-    let sourceNode = null;
-
-    let analyserConnected = false;
-
-    let visualizerAnimationFrame = null;
-
-    let visualizerModeValue = "frequency";
-
-    let scanlinesEnabled = false;
-
-    let flickerEnabled = false;
-
-    let curvatureEnabled = false;
-
-
-    /* =========================================================
-       CANVAS SETUP
-    ========================================================== */
-
-    const canvasContext =
-        visualizerCanvas.getContext("2d");
-
-    let canvasWidth = 0;
-
-    let canvasHeight = 0;
-
-    let devicePixelRatioValue =
-        Math.min(
-            window.devicePixelRatio || 1,
-            2
-        );
-
-
-    function resizeVisualizer() {
-
-        const rect =
-            visualizerCanvas.getBoundingClientRect();
-
-        canvasWidth =
-            Math.max(
-                1,
-                Math.floor(rect.width)
+        const visualizerModeLabel =
+            document.getElementById(
+                "visualizerModeLabel"
             );
 
-        canvasHeight =
-            Math.max(
-                1,
-                Math.floor(rect.height)
+        const visualizerToggle =
+            document.getElementById(
+                "visualizerToggle"
             );
 
-        devicePixelRatioValue =
-            Math.min(
-                window.devicePixelRatio || 1,
-                2
+        const visualizerToggleText =
+            document.getElementById(
+                "visualizerToggleText"
             );
 
-        visualizerCanvas.width =
-            Math.floor(
-                canvasWidth *
-                devicePixelRatioValue
+        const scanlinesButton =
+            document.getElementById(
+                "scanlinesButton"
             );
 
-        visualizerCanvas.height =
-            Math.floor(
-                canvasHeight *
-                devicePixelRatioValue
+        const scanlinesText =
+            document.getElementById(
+                "scanlinesText"
             );
 
-        canvasContext.setTransform(
-            devicePixelRatioValue,
-            0,
-            0,
-            devicePixelRatioValue,
-            0,
-            0
-        );
-    }
+        const flickerButton =
+            document.getElementById(
+                "flickerButton"
+            );
 
+        const flickerText =
+            document.getElementById(
+                "flickerText"
+            );
 
-    window.addEventListener(
-        "resize",
-        resizeVisualizer
-    );
+        const curvatureButton =
+            document.getElementById(
+                "curvatureButton"
+            );
 
+        const curvatureText =
+            document.getElementById(
+                "curvatureText"
+            );
 
-    resizeVisualizer();
+        const themeSelect =
+            document.getElementById(
+                "themeSelect"
+            );
 
+        const crtOverlay =
+            document.getElementById(
+                "crtOverlay"
+            );
 
-    /* =========================================================
-       AUDIO ANALYSER
-    ========================================================== */
+        /* STATE */
 
-    function initializeAudioAnalyser() {
+        let currentTrackIndex = 0;
 
-        if (analyserConnected) {
-            return;
-        }
+        let isShuffleEnabled = false;
 
-        try {
+        let isRepeatEnabled = false;
 
-            audioContext =
-                new (
+        let isAmbientEnabled = false;
+
+        let hasSelectedTrack = false;
+
+        let visualizerMode = "frequency";
+
+        let isScanlinesEnabled = false;
+
+        let isFlickerEnabled = false;
+
+        let isCurvatureEnabled = false;
+
+        /* AUDIO ANALYSER */
+
+        let audioContext = null;
+
+        let analyser = null;
+
+        let audioSource = null;
+
+        let frequencyData = null;
+
+        let waveformData = null;
+
+        let audioGraphReady = false;
+
+        function initializeAudioAnalyser() {
+
+            if (audioGraphReady) {
+                return;
+            }
+
+            try {
+
+                const AudioContext =
                     window.AudioContext ||
-                    window.webkitAudioContext
-                )();
+                    window.webkitAudioContext;
 
-            analyser =
-                audioContext.createAnalyser();
+                if (!AudioContext) {
+                    return;
+                }
 
-            analyser.fftSize = 256;
+                audioContext =
+                    new AudioContext();
 
-            analyser.smoothingTimeConstant =
-                0.78;
+                analyser =
+                    audioContext.createAnalyser();
 
-            sourceNode =
-                audioContext.createMediaElementSource(
-                    audioPlayer
+                analyser.fftSize = 1024;
+
+                analyser.minDecibels = -90;
+
+                analyser.maxDecibels = -10;
+
+                analyser.smoothingTimeConstant =
+                    0.78;
+
+                audioSource =
+                    audioContext.createMediaElementSource(
+                        audioPlayer
+                    );
+
+                audioSource.connect(
+                    analyser
                 );
 
-            sourceNode.connect(analyser);
+                analyser.connect(
+                    audioContext.destination
+                );
 
-            analyser.connect(
-                audioContext.destination
-            );
+                frequencyData =
+                    new Uint8Array(
+                        analyser.frequencyBinCount
+                    );
 
-            analyserConnected = true;
+                waveformData =
+                    new Uint8Array(
+                        analyser.fftSize
+                    );
 
-            startVisualizer();
+                audioGraphReady = true;
 
-        } catch (error) {
-
-            console.warn(
-                "Audio analyser unavailable:",
-                error
-            );
-
-        }
-    }
-
-
-    async function resumeAudioContext() {
-
-        if (
-            audioContext &&
-            audioContext.state === "suspended"
-        ) {
-            try {
-                await audioContext.resume();
             } catch (error) {
+
                 console.warn(
-                    "Unable to resume audio context.",
+                    "Music Holder audio analyser could not initialize.",
                     error
                 );
+
             }
+
         }
 
-    }
+        async function resumeAudioContext() {
 
+            initializeAudioAnalyser();
 
-    /* =========================================================
-       CANVAS VISUALIZER
-    ========================================================== */
+            if (
+                audioContext &&
+                audioContext.state === "suspended"
+            ) {
 
-    function clearVisualizer() {
+                try {
+                    await audioContext.resume();
+                } catch (error) {
+                    console.warn(error);
+                }
 
-        canvasContext.clearRect(
-            0,
-            0,
-            canvasWidth,
-            canvasHeight
-        );
+            }
 
-    }
-
-
-    function drawFrequencyVisualizer() {
-
-        if (!analyser) {
-            drawIdleVisualizer();
-            return;
         }
 
-        const bufferLength =
-            analyser.frequencyBinCount;
+        /* CANVAS */
 
-        const dataArray =
-            new Uint8Array(bufferLength);
+        const canvasContext =
+            visualizerCanvas.getContext("2d");
 
-        analyser.getByteFrequencyData(
-            dataArray
-        );
+        let canvasWidth = 0;
 
-        clearVisualizer();
+        let canvasHeight = 0;
 
-        const centerY =
-            canvasHeight * 0.55;
+        function resizeCanvas() {
 
-        const barCount =
-            Math.min(
-                72,
-                bufferLength
-            );
+            const rect =
+                visualizerCanvas.getBoundingClientRect();
 
-        const gap = 2;
-
-        const barWidth =
-            Math.max(
-                1,
-                (
-                    canvasWidth -
-                    gap * barCount
-                ) / barCount
-            );
-
-        for (
-            let i = 0;
-            i < barCount;
-            i++
-        ) {
-
-            const dataIndex =
-                Math.floor(
-                    i *
-                    bufferLength /
-                    barCount
+            const pixelRatio =
+                Math.min(
+                    window.devicePixelRatio || 1,
+                    2
                 );
 
-            const value =
-                dataArray[dataIndex] / 255;
-
-            const eased =
-                Math.pow(
-                    value,
-                    1.35
-                );
-
-            const barHeight =
+            canvasWidth =
                 Math.max(
-                    2,
-                    eased *
-                    canvasHeight *
-                    0.72
+                    1,
+                    Math.floor(
+                        rect.width * pixelRatio
+                    )
                 );
 
-            const x =
-                i *
-                (barWidth + gap);
+            canvasHeight =
+                Math.max(
+                    1,
+                    Math.floor(
+                        rect.height * pixelRatio
+                    )
+                );
 
-            const gradient =
-                canvasContext.createLinearGradient(
-                    0,
-                    centerY - barHeight,
-                    0,
-                    centerY + barHeight
+            visualizerCanvas.width =
+                canvasWidth;
+
+            visualizerCanvas.height =
+                canvasHeight;
+
+            canvasContext.setTransform(
+                pixelRatio,
+                0,
+                0,
+                pixelRatio,
+                0,
+                0
+            );
+
+            canvasWidth = rect.width;
+
+            canvasHeight = rect.height;
+
+        }
+
+        window.addEventListener(
+            "resize",
+            resizeCanvas
+        );
+
+        function getAccentColor() {
+
+            return getComputedStyle(
+                document.body
+            )
+                .getPropertyValue("--accent")
+                .trim();
+
+        }
+
+        function getLineColor() {
+
+            return getComputedStyle(
+                document.body
+            )
+                .getPropertyValue("--line")
+                .trim();
+
+        }
+
+        /* DRAW FREQUENCY VISUALIZER */
+
+        function drawFrequencyVisualizer() {
+
+            const width = canvasWidth;
+
+            const height = canvasHeight;
+
+            const centerY =
+                height * 0.56;
+
+            canvasContext.clearRect(
+                0,
+                0,
+                width,
+                height
+            );
+
+            canvasContext.beginPath();
+
+            canvasContext.strokeStyle =
+                getLineColor();
+
+            canvasContext.lineWidth = 1;
+
+            canvasContext.moveTo(
+                0,
+                centerY
+            );
+
+            canvasContext.lineTo(
+                width,
+                centerY
+            );
+
+            canvasContext.stroke();
+
+            if (
+                !analyser ||
+                !frequencyData
+            ) {
+
+                drawIdleVisualizer();
+
+                return;
+
+            }
+
+            analyser.getByteFrequencyData(
+                frequencyData
+            );
+
+            const barCount = 72;
+
+            const gap = 2;
+
+            const totalGap =
+                gap * (barCount - 1);
+
+            const barWidth =
+                Math.max(
+                    1,
+                    (width - totalGap) /
+                        barCount
                 );
 
             const accent =
-                getComputedStyle(
-                    document.body
-                ).getPropertyValue(
-                    "--accent"
-                ).trim();
+                getAccentColor();
 
-            gradient.addColorStop(
-                0,
-                accent
-            );
+            for (
+                let i = 0;
+                i < barCount;
+                i++
+            ) {
 
-            gradient.addColorStop(
-                0.5,
-                accent
-            );
+                const dataIndex =
+                    Math.floor(
+                        Math.pow(
+                            i / barCount,
+                            1.35
+                        ) *
+                        frequencyData.length
+                    );
 
-            gradient.addColorStop(
-                1,
-                "transparent"
-            );
+                const value =
+                    frequencyData[
+                        Math.min(
+                            dataIndex,
+                            frequencyData.length - 1
+                        )
+                    ] / 255;
 
-            canvasContext.fillStyle =
-                gradient;
+                const boosted =
+                    Math.pow(value, 0.72);
 
-            canvasContext.globalAlpha =
-                0.35 +
-                eased * 0.65;
+                const barHeight =
+                    Math.max(
+                        2,
+                        boosted *
+                        height *
+                        0.68
+                    );
 
-            canvasContext.fillRect(
-                x,
-                centerY - barHeight,
-                barWidth,
-                barHeight * 2
-            );
-        }
+                const x =
+                    i *
+                    (barWidth + gap);
 
-        canvasContext.globalAlpha = 1;
+                canvasContext.fillStyle =
+                    accent;
 
+                canvasContext.globalAlpha =
+                    0.22 +
+                    boosted * 0.78;
 
-        /* Center line */
-
-        const accent =
-            getComputedStyle(
-                document.body
-            ).getPropertyValue(
-                "--accent"
-            ).trim();
-
-        canvasContext.strokeStyle =
-            accent;
-
-        canvasContext.globalAlpha =
-            0.15;
-
-        canvasContext.lineWidth = 1;
-
-        canvasContext.beginPath();
-
-        canvasContext.moveTo(
-            0,
-            centerY
-        );
-
-        canvasContext.lineTo(
-            canvasWidth,
-            centerY
-        );
-
-        canvasContext.stroke();
-
-        canvasContext.globalAlpha = 1;
-    }
-
-
-    function drawOscilloscope() {
-
-        if (!analyser) {
-            drawIdleVisualizer();
-            return;
-        }
-
-        const bufferLength =
-            analyser.fftSize;
-
-        const dataArray =
-            new Uint8Array(bufferLength);
-
-        analyser.getByteTimeDomainData(
-            dataArray
-        );
-
-        clearVisualizer();
-
-        const accent =
-            getComputedStyle(
-                document.body
-            ).getPropertyValue(
-                "--accent"
-            ).trim();
-
-        const centerY =
-            canvasHeight / 2;
-
-        canvasContext.strokeStyle =
-            accent;
-
-        canvasContext.lineWidth = 1.5;
-
-        canvasContext.shadowBlur = 8;
-
-        canvasContext.shadowColor =
-            accent;
-
-        canvasContext.beginPath();
-
-        for (
-            let i = 0;
-            i < bufferLength;
-            i++
-        ) {
-
-            const x =
-                (
-                    i /
-                    (bufferLength - 1)
-                ) *
-                canvasWidth;
-
-            const normalized =
-                (
-                    dataArray[i] -
-                    128
-                ) / 128;
-
-            const y =
-                centerY +
-                normalized *
-                canvasHeight *
-                0.38;
-
-            if (i === 0) {
-                canvasContext.moveTo(
+                canvasContext.fillRect(
                     x,
-                    y
+                    centerY - barHeight,
+                    barWidth,
+                    barHeight
                 );
-            } else {
-                canvasContext.lineTo(
+
+                canvasContext.fillRect(
                     x,
-                    y
+                    centerY,
+                    barWidth,
+                    barHeight
                 );
+
             }
-        }
 
-        canvasContext.stroke();
-
-        canvasContext.shadowBlur = 0;
-
-
-        /* Oscilloscope center line */
-
-        canvasContext.globalAlpha =
-            0.12;
-
-        canvasContext.lineWidth = 1;
-
-        canvasContext.beginPath();
-
-        canvasContext.moveTo(
-            0,
-            centerY
-        );
-
-        canvasContext.lineTo(
-            canvasWidth,
-            centerY
-        );
-
-        canvasContext.stroke();
-
-        canvasContext.globalAlpha = 1;
-    }
-
-
-    function drawIdleVisualizer() {
-
-        clearVisualizer();
-
-        const accent =
-            getComputedStyle(
-                document.body
-            ).getPropertyValue(
-                "--accent"
-            ).trim();
-
-        const centerY =
-            canvasHeight / 2;
-
-        canvasContext.strokeStyle =
-            accent;
-
-        canvasContext.globalAlpha =
-            0.16;
-
-        canvasContext.lineWidth = 1;
-
-        canvasContext.beginPath();
-
-        canvasContext.moveTo(
-            0,
-            centerY
-        );
-
-        canvasContext.lineTo(
-            canvasWidth,
-            centerY
-        );
-
-        canvasContext.stroke();
-
-        canvasContext.globalAlpha = 1;
-
-    }
-
-
-    function renderVisualizer() {
-
-        if (
-            audioPlayer.paused ||
-            audioPlayer.ended
-        ) {
-
-            drawIdleVisualizer();
-
-        } else if (
-            visualizerModeValue ===
-            "frequency"
-        ) {
-
-            drawFrequencyVisualizer();
-
-        } else {
-
-            drawOscilloscope();
+            canvasContext.globalAlpha = 1;
 
         }
 
-        visualizerAnimationFrame =
+        /* DRAW OSCILLOSCOPE */
+
+        function drawOscilloscope() {
+
+            const width = canvasWidth;
+
+            const height = canvasHeight;
+
+            canvasContext.clearRect(
+                0,
+                0,
+                width,
+                height
+            );
+
+            if (
+                !analyser ||
+                !waveformData
+            ) {
+
+                drawIdleVisualizer();
+
+                return;
+
+            }
+
+            analyser.getByteTimeDomainData(
+                waveformData
+            );
+
+            const accent =
+                getAccentColor();
+
+            canvasContext.beginPath();
+
+            canvasContext.strokeStyle =
+                getLineColor();
+
+            canvasContext.lineWidth = 1;
+
+            canvasContext.moveTo(
+                0,
+                height / 2
+            );
+
+            canvasContext.lineTo(
+                width,
+                height / 2
+            );
+
+            canvasContext.stroke();
+
+            canvasContext.beginPath();
+
+            canvasContext.lineWidth = 1.6;
+
+            canvasContext.strokeStyle =
+                accent;
+
+            canvasContext.shadowColor =
+                accent;
+
+            canvasContext.shadowBlur = 8;
+
+            const sliceWidth =
+                width /
+                waveformData.length;
+
+            let x = 0;
+
+            for (
+                let i = 0;
+                i < waveformData.length;
+                i++
+            ) {
+
+                const value =
+                    waveformData[i] / 128;
+
+                const y =
+                    value *
+                    height /
+                    2;
+
+                if (i === 0) {
+
+                    canvasContext.moveTo(
+                        x,
+                        y
+                    );
+
+                } else {
+
+                    canvasContext.lineTo(
+                        x,
+                        y
+                    );
+
+                }
+
+                x += sliceWidth;
+
+            }
+
+            canvasContext.stroke();
+
+            canvasContext.shadowBlur = 0;
+
+        }
+
+        /* IDLE VISUALIZER */
+
+        function drawIdleVisualizer() {
+
+            const width = canvasWidth;
+
+            const height = canvasHeight;
+
+            const accent =
+                getAccentColor();
+
+            canvasContext.clearRect(
+                0,
+                0,
+                width,
+                height
+            );
+
+            canvasContext.strokeStyle =
+                getLineColor();
+
+            canvasContext.lineWidth = 1;
+
+            canvasContext.beginPath();
+
+            canvasContext.moveTo(
+                0,
+                height / 2
+            );
+
+            canvasContext.lineTo(
+                width,
+                height / 2
+            );
+
+            canvasContext.stroke();
+
+            const bars = 48;
+
+            const barWidth =
+                width / bars;
+
+            for (
+                let i = 0;
+                i < bars;
+                i++
+            ) {
+
+                const wave =
+                    Math.sin(
+                        i * 0.55
+                    ) * 2;
+
+                canvasContext.fillStyle =
+                    accent;
+
+                canvasContext.globalAlpha =
+                    0.16;
+
+                canvasContext.fillRect(
+                    i * barWidth,
+                    height / 2 - 2 - wave,
+                    Math.max(
+                        1,
+                        barWidth - 2
+                    ),
+                    4 + wave
+                );
+
+            }
+
+            canvasContext.globalAlpha = 1;
+
+        }
+
+        /* VISUALIZER LOOP */
+
+        function renderVisualizer() {
+
+            if (
+                visualizerMode ===
+                "frequency"
+            ) {
+
+                drawFrequencyVisualizer();
+
+            } else {
+
+                drawOscilloscope();
+
+            }
+
             requestAnimationFrame(
                 renderVisualizer
             );
-    }
 
-
-    function startVisualizer() {
-
-        if (visualizerAnimationFrame) {
-            return;
         }
 
-        renderVisualizer();
-    }
+        /* TIME FORMAT */
 
+        function formatTime(seconds) {
 
-    /* =========================================================
-       FORMAT TIME
-    ========================================================== */
+            if (!Number.isFinite(seconds)) {
+                return "00:00";
+            }
 
-    function formatTime(seconds) {
+            const minutes =
+                Math.floor(
+                    seconds / 60
+                );
 
-        if (!Number.isFinite(seconds)) {
-            return "00:00";
-        }
+            const remainingSeconds =
+                Math.floor(
+                    seconds % 60
+                );
 
-        const minutes =
-            Math.floor(
-                seconds / 60
-            );
-
-        const remainingSeconds =
-            Math.floor(
-                seconds % 60
-            );
-
-        return (
-            String(minutes).padStart(
+            return `${String(
+                minutes
+            ).padStart(
                 2,
                 "0"
-            ) +
-            ":" +
-            String(
+            )}:${String(
                 remainingSeconds
             ).padStart(
                 2,
                 "0"
-            )
-        );
+            )}`;
 
-    }
+        }
 
+        /* PLAYLIST */
 
-    /* =========================================================
-       META PILLS
-    ========================================================== */
+        function updatePlaylist() {
 
-    metaPills.forEach(
-        (pill) => {
+            playlistElement.innerHTML = "";
 
-            pill.addEventListener(
-                "click",
-                () => {
+            MUSIC_LIBRARY.forEach(
+                (track, index) => {
 
-                    metaPills.forEach(
-                        (item) => {
-                            item.classList.remove(
-                                "active"
-                            );
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+                    item.className =
+                        "playlist-item";
+
+                    if (
+                        index ===
+                        currentTrackIndex &&
+                        hasSelectedTrack
+                    ) {
+
+                        item.classList.add(
+                            "active"
+                        );
+
+                    }
+
+                    const indexElement =
+                        document.createElement(
+                            "span"
+                        );
+
+                    indexElement.className =
+                        "playlist-index";
+
+                    indexElement.textContent =
+                        String(
+                            index + 1
+                        ).padStart(
+                            2,
+                            "0"
+                        );
+
+                    const nameElement =
+                        document.createElement(
+                            "span"
+                        );
+
+                    nameElement.className =
+                        "playlist-name";
+
+                    nameElement.textContent =
+                        track.title;
+
+                    const trackDurationElement =
+                        document.createElement(
+                            "span"
+                        );
+
+                    trackDurationElement.className =
+                        "playlist-duration";
+
+                    trackDurationElement.textContent =
+                        track.duration ||
+                        "--:--";
+
+                    item.appendChild(
+                        indexElement
+                    );
+
+                    item.appendChild(
+                        nameElement
+                    );
+
+                    item.appendChild(
+                        trackDurationElement
+                    );
+
+                    item.addEventListener(
+                        "click",
+                        () => {
+
+                            loadTrack(index);
+
+                            playTrack();
+
                         }
                     );
 
-                    pill.classList.add(
-                        "active"
-                    );
-
-                    setTimeout(
-                        () => {
-                            pill.classList.remove(
-                                "active"
-                            );
-                        },
-                        2600
+                    playlistElement.appendChild(
+                        item
                     );
 
                 }
             );
 
-        }
-    );
-
-
-    /* =========================================================
-       PLAYLIST
-    ========================================================== */
-
-    function updatePlaylist() {
-
-        playlistElement.innerHTML = "";
-
-        MUSIC_LIBRARY.forEach(
-            (track, index) => {
-
-                const item =
-                    document.createElement(
-                        "div"
-                    );
-
-                item.className =
-                    "playlist-item";
-
-                if (
-                    index ===
-                    currentTrackIndex &&
-                    hasSelectedTrack
-                ) {
-
-                    item.classList.add(
-                        "active"
-                    );
-
-                }
-
-
-                const indexElement =
-                    document.createElement(
-                        "span"
-                    );
-
-                indexElement.className =
-                    "playlist-index";
-
-                indexElement.textContent =
-                    String(
-                        index + 1
-                    ).padStart(
-                        2,
-                        "0"
-                    );
-
-
-                const nameElement =
-                    document.createElement(
-                        "span"
-                    );
-
-                nameElement.className =
-                    "playlist-name";
-
-                nameElement.textContent =
-                    track.title;
-
-
-                const trackDurationElement =
-                    document.createElement(
-                        "span"
-                    );
-
-                trackDurationElement.className =
-                    "playlist-duration";
-
-                trackDurationElement.textContent =
-                    track.duration ||
-                    "--:--";
-
-
-                item.appendChild(
-                    indexElement
-                );
-
-                item.appendChild(
-                    nameElement
-                );
-
-                item.appendChild(
-                    trackDurationElement
-                );
-
-
-                item.addEventListener(
-                    "click",
-                    () => {
-
-                        loadTrack(index);
-
-                        playTrack();
-
-                    }
-                );
-
-
-                playlistElement.appendChild(
-                    item
-                );
-
-            }
-        );
-
-
-        playlistCount.textContent =
-            String(
-                MUSIC_LIBRARY.length
-            ).padStart(
-                2,
-                "0"
-            ) +
-            " TRANSMISSIONS";
-
-    }
-
-
-    /* =========================================================
-       LOAD TRACK
-    ========================================================== */
-
-    function loadTrack(index) {
-
-        if (!MUSIC_LIBRARY.length) {
-            return;
-        }
-
-        currentTrackIndex =
-            (
-                index +
-                MUSIC_LIBRARY.length
-            ) %
-            MUSIC_LIBRARY.length;
-
-
-        const track =
-            MUSIC_LIBRARY[
-                currentTrackIndex
-            ];
-
-
-        hasSelectedTrack = true;
-
-        songTitle.classList.remove(
-            "idle"
-        );
-
-
-        audioPlayer.src =
-            track.file;
-
-        audioPlayer.load();
-
-
-        songTitle.textContent =
-            track.title;
-
-
-        currentTimeElement.textContent =
-            "00:00";
-
-
-        durationElement.textContent =
-            track.duration ||
-            "00:00";
-
-
-        progressFill.style.width =
-            "0%";
-
-
-        headerStatus.textContent =
-            "LOADED";
-
-
-        terminalStatus.textContent =
-            "Transmission loaded: " +
-            track.title;
-
-
-        updatePlaylist();
-
-    }
-
-
-    /* =========================================================
-       PLAY
-    ========================================================== */
-
-    async function playTrack() {
-
-        initializeAudioAnalyser();
-
-        await resumeAudioContext();
-
-
-        try {
-
-            await audioPlayer.play();
-
-            playButton.textContent =
-                "❚❚";
-
-            playButton.title =
-                "Pause";
-
-            playButton.setAttribute(
-                "aria-label",
-                "Pause"
-            );
-
-
-            headerStatus.textContent =
-                "PLAYING";
-
-
-            terminalStatus.textContent =
-                "Now transmitting: " +
-                MUSIC_LIBRARY[
-                    currentTrackIndex
-                ].title;
-
-        } catch (error) {
-
-            headerStatus.textContent =
-                "ERROR";
-
-            terminalStatus.textContent =
-                "Unable to access transmission file.";
+            playlistCount.textContent =
+                `${String(
+                    MUSIC_LIBRARY.length
+                ).padStart(
+                    2,
+                    "0"
+                )} RECORDINGS`;
 
         }
 
-    }
+        /* LOAD TRACK */
 
-
-    /* =========================================================
-       PAUSE
-    ========================================================== */
-
-    function pauseTrack() {
-
-        audioPlayer.pause();
-
-        playButton.textContent =
-            "▶";
-
-        playButton.title =
-            "Play";
-
-        playButton.setAttribute(
-            "aria-label",
-            "Play or pause"
-        );
-
-
-        headerStatus.textContent =
-            "PAUSED";
-
-    }
-
-
-    /* =========================================================
-       TOGGLE PLAY
-    ========================================================== */
-
-    function togglePlay() {
-
-        initializeAudioAnalyser();
-
-        if (
-            audioPlayer.paused
-        ) {
-
-            playTrack();
-
-        } else {
-
-            pauseTrack();
-
-        }
-
-    }
-
-
-    /* =========================================================
-       NEXT / PREVIOUS
-    ========================================================== */
-
-    function getNextTrackIndex() {
-
-        if (
-            isShuffleEnabled &&
-            MUSIC_LIBRARY.length > 1
-        ) {
-
-            let randomIndex;
-
-            do {
-
-                randomIndex =
-                    Math.floor(
-                        Math.random() *
-                        MUSIC_LIBRARY.length
-                    );
-
-            } while (
-                randomIndex ===
-                currentTrackIndex
-            );
-
-            return randomIndex;
-        }
-
-        return currentTrackIndex + 1;
-    }
-
-
-    function nextTrack(
-        shouldPlay = true
-    ) {
-
-        loadTrack(
-            getNextTrackIndex()
-        );
-
-        if (shouldPlay) {
-            playTrack();
-        }
-
-    }
-
-
-    function previousTrack() {
-
-        if (
-            audioPlayer.currentTime > 3
-        ) {
-
-            audioPlayer.currentTime =
-                0;
-
-            return;
-        }
-
-
-        loadTrack(
-            currentTrackIndex - 1
-        );
-
-        playTrack();
-
-    }
-
-
-    /* =========================================================
-       BUTTON EVENTS
-    ========================================================== */
-
-    playButton.addEventListener(
-        "click",
-        togglePlay
-    );
-
-
-    nextButton.addEventListener(
-        "click",
-        () => {
-            nextTrack(true);
-        }
-    );
-
-
-    previousButton.addEventListener(
-        "click",
-        previousTrack
-    );
-
-
-    shuffleButton.addEventListener(
-        "click",
-        () => {
-
-            isShuffleEnabled =
-                !isShuffleEnabled;
-
-
-            shuffleButton.classList.toggle(
-                "active",
-                isShuffleEnabled
-            );
-
-
-            headerStatus.textContent =
-                isShuffleEnabled
-                    ? "SHUFFLE"
-                    : "READY";
-
-        }
-    );
-
-
-    repeatButton.addEventListener(
-        "click",
-        () => {
-
-            isRepeatEnabled =
-                !isRepeatEnabled;
-
-
-            repeatButton.classList.toggle(
-                "active",
-                isRepeatEnabled
-            );
-
-
-            headerStatus.textContent =
-                isRepeatEnabled
-                    ? "REPEAT"
-                    : "READY";
-
-        }
-    );
-
-
-    ambientButton.addEventListener(
-        "click",
-        () => {
-
-            isAmbientEnabled =
-                !isAmbientEnabled;
-
-
-            document.body.classList.toggle(
-                "ambient-mode",
-                isAmbientEnabled
-            );
-
-
-            ambientButton.classList.toggle(
-                "active",
-                isAmbientEnabled
-            );
-
-
-            headerStatus.textContent =
-                isAmbientEnabled
-                    ? "AMBIENT"
-                    : "READY";
-
-        }
-    );
-
-
-    /* =========================================================
-       VOLUME
-    ========================================================== */
-
-    volumeSlider.addEventListener(
-        "input",
-        () => {
-
-            audioPlayer.volume =
-                Number(
-                    volumeSlider.value
-                );
-
-        }
-    );
-
-
-    /* =========================================================
-       PROGRESS BAR
-    ========================================================== */
-
-    progressTrack.addEventListener(
-        "click",
-        (event) => {
+        function loadTrack(index) {
 
             if (
-                !Number.isFinite(
-                    audioPlayer.duration
-                )
+                !MUSIC_LIBRARY.length
             ) {
                 return;
             }
 
+            currentTrackIndex =
+                (
+                    index +
+                    MUSIC_LIBRARY.length
+                ) %
+                MUSIC_LIBRARY.length;
 
-            const rect =
-                progressTrack.getBoundingClientRect();
+            const track =
+                MUSIC_LIBRARY[
+                    currentTrackIndex
+                ];
 
+            hasSelectedTrack = true;
 
-            const clickPosition =
-                event.clientX -
-                rect.left;
+            songTitle.classList.remove(
+                "idle"
+            );
 
+            audioPlayer.src =
+                track.file;
 
-            const percentage =
-                clickPosition /
-                rect.width;
+            audioPlayer.load();
 
+            songTitle.textContent =
+                track.title;
 
-            audioPlayer.currentTime =
-                percentage *
-                audioPlayer.duration;
-
-        }
-    );
-
-
-    /* =========================================================
-       AUDIO EVENTS
-    ========================================================== */
-
-    audioPlayer.addEventListener(
-        "loadedmetadata",
-        () => {
-
-            const duration =
-                formatTime(
-                    audioPlayer.duration
-                );
-
+            currentTimeElement.textContent =
+                "00:00";
 
             durationElement.textContent =
-                duration;
+                track.duration ||
+                "00:00";
 
+            progressFill.style.width =
+                "0%";
 
-            MUSIC_LIBRARY[
-                currentTrackIndex
-            ].duration =
-                duration;
+            headerStatus.textContent =
+                "LOADED";
 
+            terminalStatus.textContent =
+                `Signal loaded: ${track.title}`;
 
             updatePlaylist();
 
         }
-    );
 
+        /* PLAY */
 
-    audioPlayer.addEventListener(
-        "timeupdate",
-        () => {
+        async function playTrack() {
 
-            if (
-                !Number.isFinite(
-                    audioPlayer.duration
-                )
-            ) {
-                return;
-            }
+            await resumeAudioContext();
 
+            audioPlayer.play()
+                .then(() => {
 
-            const percentage =
-                (
-                    audioPlayer.currentTime /
-                    audioPlayer.duration
-                ) * 100;
+                    playButton.textContent =
+                        "❚❚";
 
+                    playButton.title =
+                        "Pause";
 
-            progressFill.style.width =
-                percentage + "%";
+                    headerStatus.textContent =
+                        "PLAYING";
 
+                    terminalStatus.textContent =
+                        `Now holding: ${MUSIC_LIBRARY[
+                            currentTrackIndex
+                        ].title}`;
 
-            currentTimeElement.textContent =
-                formatTime(
-                    audioPlayer.currentTime
-                );
+                })
+                .catch(() => {
+
+                    headerStatus.textContent =
+                        "ERROR";
+
+                    terminalStatus.textContent =
+                        "Unable to access audio signal.";
+
+                });
 
         }
-    );
 
+        /* PAUSE */
 
-    audioPlayer.addEventListener(
-        "play",
-        () => {
+        function pauseTrack() {
 
-            initializeAudioAnalyser();
+            audioPlayer.pause();
 
-            resumeAudioContext();
+            playButton.textContent =
+                "▶";
+
+            playButton.title =
+                "Play";
 
             headerStatus.textContent =
-                "PLAYING";
+                "PAUSED";
+
+            terminalStatus.textContent =
+                "Signal paused. Holder remains online.";
 
         }
-    );
 
+        /* TOGGLE PLAY */
 
-    audioPlayer.addEventListener(
-        "pause",
-        () => {
+        function togglePlay() {
 
             if (
-                hasSelectedTrack
+                audioPlayer.paused
             ) {
-
-                headerStatus.textContent =
-                    "PAUSED";
-
-            }
-
-        }
-    );
-
-
-    audioPlayer.addEventListener(
-        "ended",
-        () => {
-
-            if (
-                isRepeatEnabled
-            ) {
-
-                audioPlayer.currentTime =
-                    0;
 
                 playTrack();
 
             } else {
 
-                nextTrack(true);
+                pauseTrack();
 
             }
 
         }
-    );
 
+        /* NEXT TRACK */
 
-    audioPlayer.addEventListener(
-        "error",
-        () => {
-
-            headerStatus.textContent =
-                "ERROR";
-
-
-            terminalStatus.textContent =
-                "Transmission unavailable. Check the audio file path.";
-
-        }
-    );
-
-
-    /* =========================================================
-       VISUALIZER MODE
-    ========================================================== */
-
-    visualizerToggle.addEventListener(
-        "click",
-        () => {
-
-            visualizerModeValue =
-                visualizerModeValue ===
-                "frequency"
-                    ? "oscilloscope"
-                    : "frequency";
-
-
-            const isFrequency =
-                visualizerModeValue ===
-                "frequency";
-
-
-            visualizerMode.textContent =
-                isFrequency
-                    ? "FREQUENCY"
-                    : "OSCILLOSCOPE";
-
-
-            visualizerToggle.textContent =
-                isFrequency
-                    ? "VISUALIZER: FREQUENCY"
-                    : "VISUALIZER: OSCILLOSCOPE";
-
-        }
-    );
-
-
-    /* =========================================================
-       CRT SCANLINES
-    ========================================================== */
-
-    scanlineToggle.addEventListener(
-        "click",
-        () => {
-
-            scanlinesEnabled =
-                !scanlinesEnabled;
-
-
-            document.body.classList.toggle(
-                "crt-scanlines",
-                scanlinesEnabled
-            );
-
-
-            scanlineToggle.classList.toggle(
-                "active",
-                scanlinesEnabled
-            );
-
-
-            scanlineToggle.textContent =
-                scanlinesEnabled
-                    ? "CRT SCANLINES: ON"
-                    : "CRT SCANLINES: OFF";
-
-        }
-    );
-
-
-    /* =========================================================
-       CRT FLICKER
-    ========================================================== */
-
-    flickerToggle.addEventListener(
-        "click",
-        () => {
-
-            flickerEnabled =
-                !flickerEnabled;
-
-
-            document.body.classList.toggle(
-                "crt-flicker",
-                flickerEnabled
-            );
-
-
-            flickerToggle.classList.toggle(
-                "active",
-                flickerEnabled
-            );
-
-
-            flickerToggle.textContent =
-                flickerEnabled
-                    ? "SCREEN FLICKER: ON"
-                    : "SCREEN FLICKER: OFF";
-
-        }
-    );
-
-
-    /* =========================================================
-       CRT CURVATURE
-    ========================================================== */
-
-    curvatureToggle.addEventListener(
-        "click",
-        () => {
-
-            curvatureEnabled =
-                !curvatureEnabled;
-
-
-            document.body.classList.toggle(
-                "crt-curvature",
-                curvatureEnabled
-            );
-
-
-            curvatureToggle.classList.toggle(
-                "active",
-                curvatureEnabled
-            );
-
-
-            curvatureToggle.textContent =
-                curvatureEnabled
-                    ? "CRT CURVATURE: ON"
-                    : "CRT CURVATURE: OFF";
-
-        }
-    );
-
-
-    /* =========================================================
-       THEME SWITCHER
-    ========================================================== */
-
-    themeSelect.addEventListener(
-        "change",
-        () => {
-
-            document.body.classList.remove(
-                "theme-amber",
-                "theme-matrix",
-                "theme-cyan"
-            );
-
-
-            const selectedTheme =
-                themeSelect.value;
-
+        function getNextTrackIndex() {
 
             if (
-                selectedTheme ===
-                "amber"
+                isShuffleEnabled &&
+                MUSIC_LIBRARY.length > 1
             ) {
 
-                document.body.classList.add(
-                    "theme-amber"
+                let randomIndex;
+
+                do {
+
+                    randomIndex =
+                        Math.floor(
+                            Math.random() *
+                            MUSIC_LIBRARY.length
+                        );
+
+                } while (
+                    randomIndex ===
+                    currentTrackIndex
                 );
 
+                return randomIndex;
+
             }
 
+            return currentTrackIndex + 1;
+
+        }
+
+        function nextTrack(
+            shouldPlay = true
+        ) {
+
+            loadTrack(
+                getNextTrackIndex()
+            );
+
+            if (shouldPlay) {
+                playTrack();
+            }
+
+        }
+
+        /* PREVIOUS TRACK */
+
+        function previousTrack() {
 
             if (
-                selectedTheme ===
-                "matrix"
+                audioPlayer.currentTime > 3
             ) {
 
-                document.body.classList.add(
-                    "theme-matrix"
+                audioPlayer.currentTime =
+                    0;
+
+                return;
+
+            }
+
+            loadTrack(
+                currentTrackIndex - 1
+            );
+
+            playTrack();
+
+        }
+
+        /* MAIN PLAYER EVENTS */
+
+        playButton.addEventListener(
+            "click",
+            togglePlay
+        );
+
+        nextButton.addEventListener(
+            "click",
+            () => nextTrack(true)
+        );
+
+        previousButton.addEventListener(
+            "click",
+            previousTrack
+        );
+
+        /* SHUFFLE */
+
+        shuffleButton.addEventListener(
+            "click",
+            () => {
+
+                isShuffleEnabled =
+                    !isShuffleEnabled;
+
+                shuffleButton.classList.toggle(
+                    "active",
+                    isShuffleEnabled
                 );
 
+                headerStatus.textContent =
+                    isShuffleEnabled
+                        ? "SHUFFLE"
+                        : "READY";
+
             }
+        );
 
+        /* REPEAT */
 
-            if (
-                selectedTheme ===
-                "cyan"
-            ) {
+        repeatButton.addEventListener(
+            "click",
+            () => {
 
-                document.body.classList.add(
+                isRepeatEnabled =
+                    !isRepeatEnabled;
+
+                repeatButton.classList.toggle(
+                    "active",
+                    isRepeatEnabled
+                );
+
+                headerStatus.textContent =
+                    isRepeatEnabled
+                        ? "REPEAT"
+                        : "READY";
+
+            }
+        );
+
+        /* AMBIENT MODE */
+
+        ambientButton.addEventListener(
+            "click",
+            () => {
+
+                isAmbientEnabled =
+                    !isAmbientEnabled;
+
+                document.body.classList.toggle(
+                    "ambient-mode",
+                    isAmbientEnabled
+                );
+
+                ambientButton.classList.toggle(
+                    "active",
+                    isAmbientEnabled
+                );
+
+                headerStatus.textContent =
+                    isAmbientEnabled
+                        ? "AMBIENT"
+                        : "READY";
+
+            }
+        );
+
+        /* VOLUME */
+
+        volumeSlider.addEventListener(
+            "input",
+            () => {
+
+                audioPlayer.volume =
+                    Number(
+                        volumeSlider.value
+                    );
+
+            }
+        );
+
+        /* PROGRESS */
+
+        progressTrack.addEventListener(
+            "click",
+            (event) => {
+
+                if (
+                    !Number.isFinite(
+                        audioPlayer.duration
+                    )
+                ) {
+
+                    return;
+
+                }
+
+                const rect =
+                    progressTrack
+                        .getBoundingClientRect();
+
+                const clickPosition =
+                    event.clientX -
+                    rect.left;
+
+                const percentage =
+                    clickPosition /
+                    rect.width;
+
+                audioPlayer.currentTime =
+                    percentage *
+                    audioPlayer.duration;
+
+            }
+        );
+
+        /* AUDIO METADATA */
+
+        audioPlayer.addEventListener(
+            "loadedmetadata",
+            () => {
+
+                const duration =
+                    formatTime(
+                        audioPlayer.duration
+                    );
+
+                durationElement.textContent =
+                    duration;
+
+                MUSIC_LIBRARY[
+                    currentTrackIndex
+                ].duration =
+                    duration;
+
+                updatePlaylist();
+
+            }
+        );
+
+        /* TIME UPDATE */
+
+        audioPlayer.addEventListener(
+            "timeupdate",
+            () => {
+
+                if (
+                    !Number.isFinite(
+                        audioPlayer.duration
+                    )
+                ) {
+
+                    return;
+
+                }
+
+                const percentage =
+                    (
+                        audioPlayer.currentTime /
+                        audioPlayer.duration
+                    ) *
+                    100;
+
+                progressFill.style.width =
+                    `${percentage}%`;
+
+                currentTimeElement.textContent =
+                    formatTime(
+                        audioPlayer.currentTime
+                    );
+
+            }
+        );
+
+        /* PLAY STATE EVENTS */
+
+        audioPlayer.addEventListener(
+            "play",
+            () => {
+
+                playButton.textContent =
+                    "❚❚";
+
+                playButton.title =
+                    "Pause";
+
+                headerStatus.textContent =
+                    "PLAYING";
+
+            }
+        );
+
+        audioPlayer.addEventListener(
+            "pause",
+            () => {
+
+                playButton.textContent =
+                    "▶";
+
+                playButton.title =
+                    "Play";
+
+            }
+        );
+
+        /* TRACK ENDED */
+
+        audioPlayer.addEventListener(
+            "ended",
+            () => {
+
+                if (
+                    isRepeatEnabled
+                ) {
+
+                    audioPlayer.currentTime =
+                        0;
+
+                    playTrack();
+
+                } else {
+
+                    nextTrack(true);
+
+                }
+
+            }
+        );
+
+        /* AUDIO ERROR */
+
+        audioPlayer.addEventListener(
+            "error",
+            () => {
+
+                headerStatus.textContent =
+                    "ERROR";
+
+                terminalStatus.textContent =
+                    "Audio unavailable. Check the file path.";
+
+            }
+        );
+
+        /* VISUALIZER MODE */
+
+        visualizerToggle.addEventListener(
+            "click",
+            () => {
+
+                visualizerMode =
+                    visualizerMode ===
+                    "frequency"
+                        ? "oscilloscope"
+                        : "frequency";
+
+                const label =
+                    visualizerMode ===
+                    "frequency"
+                        ? "FREQUENCY"
+                        : "OSCILLOSCOPE";
+
+                visualizerToggleText.textContent =
+                    label;
+
+                visualizerModeLabel.textContent =
+                    label;
+
+            }
+        );
+
+        /* SCANLINES */
+
+        scanlinesButton.addEventListener(
+            "click",
+            () => {
+
+                isScanlinesEnabled =
+                    !isScanlinesEnabled;
+
+                crtOverlay.classList.toggle(
+                    "scanlines",
+                    isScanlinesEnabled
+                );
+
+                scanlinesButton.classList.toggle(
+                    "active",
+                    isScanlinesEnabled
+                );
+
+                scanlinesText.textContent =
+                    isScanlinesEnabled
+                        ? "ON"
+                        : "OFF";
+
+            }
+        );
+
+        /* SCREEN FLICKER */
+
+        flickerButton.addEventListener(
+            "click",
+            () => {
+
+                isFlickerEnabled =
+                    !isFlickerEnabled;
+
+                crtOverlay.classList.toggle(
+                    "flicker",
+                    isFlickerEnabled
+                );
+
+                flickerButton.classList.toggle(
+                    "active",
+                    isFlickerEnabled
+                );
+
+                flickerText.textContent =
+                    isFlickerEnabled
+                        ? "ON"
+                        : "OFF";
+
+            }
+        );
+
+        /* CRT CURVATURE */
+
+        curvatureButton.addEventListener(
+            "click",
+            () => {
+
+                isCurvatureEnabled =
+                    !isCurvatureEnabled;
+
+                document.body.classList.toggle(
+                    "crt-curvature",
+                    isCurvatureEnabled
+                );
+
+                curvatureButton.classList.toggle(
+                    "active",
+                    isCurvatureEnabled
+                );
+
+                curvatureText.textContent =
+                    isCurvatureEnabled
+                        ? "ON"
+                        : "OFF";
+
+            }
+        );
+
+        /* THEME SWITCHER */
+
+        themeSelect.addEventListener(
+            "change",
+            () => {
+
+                document.body.classList.remove(
+                    "theme-amber",
+                    "theme-matrix",
                     "theme-cyan"
                 );
 
-            }
+                const selected =
+                    themeSelect.value;
 
+                if (
+                    selected === "amber"
+                ) {
 
-            headerStatus.textContent =
-                "THEME";
-
-
-            setTimeout(
-                () => {
-
-                    headerStatus.textContent =
-                        audioPlayer.paused
-                            ? "READY"
-                            : "PLAYING";
-
-                },
-                900
-            );
-
-        }
-    );
-
-
-    /* =========================================================
-       KEYBOARD CONTROLS
-    ========================================================== */
-
-    document.addEventListener(
-        "keydown",
-        (event) => {
-
-            const tagName =
-                document.activeElement.tagName;
-
-
-            if (
-                tagName === "INPUT" ||
-                tagName === "TEXTAREA" ||
-                tagName === "BUTTON" ||
-                tagName === "SELECT"
-            ) {
-                return;
-            }
-
-
-            if (
-                event.code ===
-                "Space"
-            ) {
-
-                event.preventDefault();
-
-                togglePlay();
-
-            }
-
-
-            if (
-                event.code ===
-                "ArrowRight"
-            ) {
-
-                nextTrack(true);
-
-            }
-
-
-            if (
-                event.code ===
-                "ArrowLeft"
-            ) {
-
-                previousTrack();
-
-            }
-
-
-            if (
-                event.code ===
-                "ArrowUp"
-            ) {
-
-                volumeSlider.value =
-                    Math.min(
-                        1,
-                        Number(
-                            volumeSlider.value
-                        ) + 0.05
+                    document.body.classList.add(
+                        "theme-amber"
                     );
 
+                }
 
-                audioPlayer.volume =
-                    Number(
-                        volumeSlider.value
+                if (
+                    selected === "matrix"
+                ) {
+
+                    document.body.classList.add(
+                        "theme-matrix"
                     );
+
+                }
+
+                if (
+                    selected === "cyan"
+                ) {
+
+                    document.body.classList.add(
+                        "theme-cyan"
+                    );
+
+                }
+
+                headerStatus.textContent =
+                    "THEME";
+
+                terminalStatus.textContent =
+                    `Theme loaded: ${themeSelect
+                        .options[
+                            themeSelect.selectedIndex
+                        ].text}`;
 
             }
-
-
-            if (
-                event.code ===
-                "ArrowDown"
-            ) {
-
-                volumeSlider.value =
-                    Math.max(
-                        0,
-                        Number(
-                            volumeSlider.value
-                        ) - 0.05
-                    );
-
-
-                audioPlayer.volume =
-                    Number(
-                        volumeSlider.value
-                    );
-
-            }
-
-        }
-    );
-
-
-    /* =========================================================
-       SECRET SIGNAL
-    ========================================================== */
-
-    secretButton.addEventListener(
-        "click",
-        () => {
-
-            const messages = [
-
-                "SIGNAL DETECTED.",
-
-                "NOTHING HERE IS ACCIDENTAL.",
-
-                "THE ARCHIVE REMEMBERS.",
-
-                "MUSIC VAULT CONNECTION STABLE.",
-
-                "SOME FREQUENCIES NEVER DIE."
-
-            ];
-
-
-            const message =
-                messages[
-                    Math.floor(
-                        Math.random() *
-                        messages.length
-                    )
-                ];
-
-
-            secretButton.textContent =
-                "[ " +
-                message +
-                " ]";
-
-
-            setTimeout(
-                () => {
-
-                    secretButton.textContent =
-                        "[ THERE IS A SIGNAL BENEATH THIS PAGE ]";
-
-                },
-                2500
-            );
-
-        }
-    );
-
-
-    /* =========================================================
-       INITIALIZATION
-    ========================================================== */
-
-    audioPlayer.volume =
-        Number(
-            volumeSlider.value
         );
 
+        /* SECRET MESSAGE */
 
-    updatePlaylist();
+        secretButton.addEventListener(
+            "click",
+            () => {
 
+                const messages = [
 
-    songTitle.textContent =
-        "Not Playing Yet";
+                    "SIGNAL FOUND.",
 
+                    "THE HOLDER REMEMBERS.",
 
-    songTitle.classList.add(
-        "idle"
-    );
+                    "SOME SOUNDS REFUSE TO FADE.",
 
+                    "AUDIO STORAGE STABLE.",
 
-    headerStatus.textContent =
-        "READY";
+                    "NOTHING IS LOST WHILE IT IS HELD.",
 
+                    "THE SIGNAL IS STILL HERE.",
 
-    terminalStatus.textContent =
-        "Waiting for transmission data...";
+                    "YOU FOUND THE QUIET CHANNEL."
 
+                ];
 
-    drawIdleVisualizer();
+                const message =
+                    messages[
+                        Math.floor(
+                            Math.random() *
+                            messages.length
+                        )
+                    ];
 
-</script>
+                secretButton.textContent =
+                    `[ ${message} ]`;
+
+                setTimeout(
+                    () => {
+
+                        secretButton.textContent =
+                            "[ THERE IS SOMETHING STILL PLAYING ]";
+
+                    },
+                    2500
+                );
+
+            }
+        );
+
+        /* KEYBOARD CONTROLS */
+
+        document.addEventListener(
+            "keydown",
+            (event) => {
+
+                const activeElement =
+                    document.activeElement;
+
+                const tagName =
+                    activeElement.tagName;
+
+                if (
+                    tagName === "INPUT" ||
+                    tagName === "TEXTAREA" ||
+                    tagName === "BUTTON" ||
+                    tagName === "SELECT"
+                ) {
+
+                    return;
+
+                }
+
+                if (
+                    event.code === "Space"
+                ) {
+
+                    event.preventDefault();
+
+                    togglePlay();
+
+                }
+
+                if (
+                    event.code ===
+                    "ArrowRight"
+                ) {
+
+                    nextTrack(true);
+
+                }
+
+                if (
+                    event.code ===
+                    "ArrowLeft"
+                ) {
+
+                    previousTrack();
+
+                }
+
+                if (
+                    event.code ===
+                    "ArrowUp"
+                ) {
+
+                    volumeSlider.value =
+                        Math.min(
+                            1,
+                            Number(
+                                volumeSlider.value
+                            ) + 0.05
+                        );
+
+                    audioPlayer.volume =
+                        Number(
+                            volumeSlider.value
+                        );
+
+                }
+
+                if (
+                    event.code ===
+                    "ArrowDown"
+                ) {
+
+                    volumeSlider.value =
+                        Math.max(
+                            0,
+                            Number(
+                                volumeSlider.value
+                            ) - 0.05
+                        );
+
+                    audioPlayer.volume =
+                        Number(
+                            volumeSlider.value
+                        );
+
+                }
+
+            }
+        );
+
+        /* INITIALIZATION */
+
+        audioPlayer.volume =
+            Number(
+                volumeSlider.value
+            );
+
+        resizeCanvas();
+
+        updatePlaylist();
+
+        songTitle.textContent =
+            "Nothing Loaded";
+
+        songTitle.classList.add(
+            "idle"
+        );
+
+        headerStatus.textContent =
+            "READY";
+
+        terminalStatus.textContent =
+            "Waiting for audio signal...";
+
+        renderVisualizer();
+
+    </script>
 
 </body>
 </html>
